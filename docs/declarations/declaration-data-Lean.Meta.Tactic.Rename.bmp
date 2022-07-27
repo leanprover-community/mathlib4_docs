@@ -1,0 +1,1 @@
+{"name":"Lean.Meta.Tactic.Rename","instances":[],"imports":["Init","Lean.Meta.Tactic.Util"],"declarations":[{"sourceLink":"https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Meta/Tactic/Rename.lean#L10-L15","name":"Lean.Meta.rename","docLink":"./Lean/Meta/Tactic/Rename.html#Lean.Meta.rename","doc":""}]}

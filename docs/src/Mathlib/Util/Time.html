@@ -1,0 +1,41 @@
+<html lang="en" class="alectryon-standalone"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././src/alectryon.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="stylesheet" href="../../.././src/docutils_basic.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><script defer="true" src="../../.././src/alectryon.js"></script></head><body><article class="alectryon-root alectryon-centered"><div class="alectryon-banner">Built with <a href="https://github.com/leanprover/doc-gen4">doc-gen4</a>, running Lean4.
+      Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents.
+      Use <kbd>Ctrl+↑</kbd><kbd>Ctrl+↓</kbd>to navigate, <kbd>Ctrl+🖱️</kbd>to focus.
+      On Mac, use <kbd>Cmd</kbd>instead of <kbd>Ctrl</kbd>.
+    </div><pre class="alectryon-io highlight"><span class="alectryon-wsp"><span class="alectryon-token">/-
+Copyright (c) 2021 Mario Carneiro. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Mario Carneiro
+-/
+import Lean
+
+/-!
+# Defines `#time` command.
+
+Time the elaboration of a command, and print the result (in milliseconds).
+-/
+
+</span><span class="alectryon-token"><span class="k">section</span></span><span class="alectryon-token">
+</span><span class="alectryon-token"><span class="k">open</span></span><span class="alectryon-token"> Lean Elab Command
+
+</span><span class="alectryon-token"><span class="k">syntax</span></span><span class="alectryon-token"> (</span><span class="alectryon-token"><span class="k">name</span></span><span class="alectryon-token"> := timeCmd)  "#time " command : command
+
+/--
+Time the elaboration of a command, and print the result (in milliseconds).
+
+Example usage:
+```
+set_option maxRecDepth 100000 in
+#time example : (List.range 500).length = 500 := rfl
+```
+-/
+@[commandElab timeCmd] </span><span class="alectryon-token"><span class="k">def</span></span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>timeCmdElab</var><b>: </b><span>CommandElab</span></span></div></blockquote></div></small></div><span class="nv">timeCmdElab</span></span><span class="alectryon-token"> : </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>CommandElab</var><b>: </b><span>Type</span></span></div></blockquote></div></small></div>CommandElab</span><span class="alectryon-token">
+  | `(</span><span class="alectryon-token"><span class="k">#time</span></span><span class="alectryon-token">%$</span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>tk</var><b>: </b><span>Syntax</span></span></div></blockquote></div></small></div><span class="nv">tk</span></span><span class="alectryon-token"> $</span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>stx</var><b>: </b><span>TSyntax `command</span></span></div></blockquote></div></small></div><span class="nv">stx</span></span><span class="alectryon-token">:command) => </span><span class="alectryon-token"><span class="k">do</span></span><span class="alectryon-token">
+    </span><span class="alectryon-token"><span class="k">let</span></span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>start</var><b>: </b><span>Nat</span></span></div></blockquote></div></small></div><span class="nv">start</span></span><span class="alectryon-token"> ← </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>IO.monoMsNow</var><b>: </b><span>BaseIO Nat</span></span></div></blockquote></div></small></div>IO.monoMsNow</span><span class="alectryon-token">
+    </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>elabCommand</var><b>: </b><span>Syntax → CommandElabM Unit</span></span></div></blockquote></div></small></div>elabCommand</span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>stx</var><b>: </b><span>TSyntax `command</span></span></div></blockquote></div></small></div><span class="nv">stx</span></span><span class="alectryon-token">
+    </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>logInfoAt</var><b>: </b><span>{m : Type → Type} →
+  [inst : Monad m] → [inst : MonadLog m] → [inst : AddMessageContext m] → Syntax → MessageData → m Unit</span></span></div></blockquote></div></small></div>logInfoAt</span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>tk</var><b>: </b><span>Syntax</span></span></div></blockquote></div></small></div><span class="nv">tk</span></span><span class="alectryon-token"> </span><span class="alectryon-token"><span class="k">m!</span></span><span class="alectryon-token">"time: {(← </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>IO.monoMsNow</var><b>: </b><span>BaseIO Nat</span></span></div></blockquote></div></small></div>IO.monoMsNow</span><span class="alectryon-token">) - </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>start</var><b>: </b><span>Nat</span></span></div></blockquote></div></small></div><span class="nv">start</span></span><span class="alectryon-token">}ms"
+  | _ => </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>throwUnsupportedSyntax</var><b>: </b><span>{m : Type → Type} → {α : Type} → [inst : MonadExceptOf Exception m] → m α</span></span></div></blockquote></div></small></div>throwUnsupportedSyntax</span><span class="alectryon-token">
+
+</span><span class="alectryon-token"><span class="k">end</span></span><span class="alectryon-token">
+</span></span></pre></article></body></html>

@@ -1,0 +1,1 @@
+{"name":"Mathlib.Tactic.Lint","instances":[],"imports":["Init","Mathlib.Tactic.Lint.Misc","Mathlib.Tactic.Lint.Simp","Mathlib.Tactic.Lint.Frontend"],"declarations":[]}

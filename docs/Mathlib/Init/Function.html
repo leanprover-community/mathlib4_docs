@@ -1,0 +1,351 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Init.Function</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Init.Function";</script><script type="module" src="../.././nav.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Mathlib.Init.Function</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Mathlib.Init.Function</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Init.Function" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Function.comp_right">Function.comp_right</a></div><div class="nav_link"><a class="break_within" href="#Function.comp_left">Function.comp_left</a></div><div class="nav_link"><a class="break_within" href="#Function.on_fun">Function.on_fun</a></div><div class="nav_link"><a class="break_within" href="#Function.combine">Function.combine</a></div><div class="nav_link"><a class="break_within" href="#Function.swap">Function.swap</a></div><div class="nav_link"><a class="break_within" href="#Function.app">Function.app</a></div><div class="nav_link"><a class="break_within" href="#Function.left_id">Function.left_id</a></div><div class="nav_link"><a class="break_within" href="#Function.right_id">Function.right_id</a></div><div class="nav_link"><a class="break_within" href="#Function.comp.assoc">Function.comp.assoc</a></div><div class="nav_link"><a class="break_within" href="#Function.comp.left_id">Function.comp.left_id</a></div><div class="nav_link"><a class="break_within" href="#Function.comp.right_id">Function.comp.right_id</a></div><div class="nav_link"><a class="break_within" href="#Function.comp_const_right">Function.comp_const_right</a></div><div class="nav_link"><a class="break_within" href="#Function.injective">Function.injective</a></div><div class="nav_link"><a class="break_within" href="#Function.injective.comp">Function.injective.comp</a></div><div class="nav_link"><a class="break_within" href="#Function.surjective">Function.surjective</a></div><div class="nav_link"><a class="break_within" href="#Function.surjective.comp">Function.surjective.comp</a></div><div class="nav_link"><a class="break_within" href="#Function.bijective">Function.bijective</a></div><div class="nav_link"><a class="break_within" href="#Function.bijective.comp">Function.bijective.comp</a></div><div class="nav_link"><a class="break_within" href="#Function.LeftInverse">Function.LeftInverse</a></div><div class="nav_link"><a class="break_within" href="#Function.has_LeftInverse">Function.has_LeftInverse</a></div><div class="nav_link"><a class="break_within" href="#Function.RightInverse">Function.RightInverse</a></div><div class="nav_link"><a class="break_within" href="#Function.has_RightInverse">Function.has_RightInverse</a></div><div class="nav_link"><a class="break_within" href="#Function.LeftInverse.injective">Function.LeftInverse.injective</a></div><div class="nav_link"><a class="break_within" href="#Function.has_LeftInverse.injective">Function.has_LeftInverse.injective</a></div><div class="nav_link"><a class="break_within" href="#Function.RightInverse_of_injective_of_LeftInverse">Function.RightInverse_of_injective_of_LeftInverse</a></div><div class="nav_link"><a class="break_within" href="#Function.RightInverse.surjective">Function.RightInverse.surjective</a></div><div class="nav_link"><a class="break_within" href="#Function.has_RightInverse.surjective">Function.has_RightInverse.surjective</a></div><div class="nav_link"><a class="break_within" href="#Function.LeftInverse_of_surjective_of_RightInverse">Function.LeftInverse_of_surjective_of_RightInverse</a></div><div class="nav_link"><a class="break_within" href="#Function.injective_id">Function.injective_id</a></div><div class="nav_link"><a class="break_within" href="#Function.surjective_id">Function.surjective_id</a></div><div class="nav_link"><a class="break_within" href="#Function.bijective_id">Function.bijective_id</a></div><div class="nav_link"><a class="break_within" href="#Function.curry">Function.curry</a></div><div class="nav_link"><a class="break_within" href="#Function.uncurry">Function.uncurry</a></div><div class="nav_link"><a class="break_within" href="#Function.curry_uncurry">Function.curry_uncurry</a></div><div class="nav_link"><a class="break_within" href="#Function.uncurry_curry">Function.uncurry_curry</a></div><div class="nav_link"><a class="break_within" href="#Function.LeftInverse.id">Function.LeftInverse.id</a></div><div class="nav_link"><a class="break_within" href="#Function.RightInverse.id">Function.RightInverse.id</a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="General-operations-on-functions">General operations on functions <a class="hover-link" href="#General-operations-on-functions">#</a></h1></div><div class="decl" id="Function.comp_right"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L16-L17">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.comp_right">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.comp_right">Function.comp_right</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">β</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.comp_right">Function.comp_right</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">b</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span> (<span class="fn"><span class="fn">g</span> <span class="fn">a</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="Function.comp_left"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L19-L20">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.comp_left">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.comp_left">Function.comp_left</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">β</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">β</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.comp_left">Function.comp_left</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">g</span> <span class="fn">a</span></span>) <span class="fn">b</span></span></span></li></ul></details></div></div><div class="decl" id="Function.on_fun"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L25-L26">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.on_fun">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.on_fun">Function.on_fun</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Sort u₃</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">β</span> → <span class="fn">φ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <span class="fn">φ</span></span></div></div><p>Given functions <code>f : β → β → φ</code> and <code>g : α → β</code>, produce a function <code>α → α → φ</code> that evaluates
+<code>g</code> on each argument, then applies <code>f</code> to the results. Can be used, e.g., to transfer a relation
+from <code>β</code> to <code>α</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.on_fun">Function.on_fun</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>) (<span class="fn"><span class="fn">g</span> <span class="fn">y</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="Function.combine"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L28-L30">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.combine">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.combine">Function.combine</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Sort u₃</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Sort u₄</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ζ : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(op : <span class="fn"><span class="fn">φ</span> → <span class="fn"><span class="fn">δ</span> → <span class="fn">ζ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">ζ</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.combine">Function.combine</a> <span class="fn">f</span> <span class="fn">op</span> <span class="fn">g</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">op</span> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span> <span class="fn">y</span></span>) (<span class="fn"><span class="fn">g</span> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="Function.swap"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L32-L33">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.swap">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.swap">Function.swap</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">Sort u₃</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">x</span> : <span class="fn">α</span>) → <span class="fn">(<span class="fn">y</span> : <span class="fn">β</span>) → <span class="fn"><span class="fn">φ</span> <span class="fn">x</span> <span class="fn">y</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">φ</span> <span class="fn">x</span> <span class="fn">y</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.swap">Function.swap</a> <span class="fn">f</span> <span class="fn">y</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span> <span class="fn">y</span></span></span></li></ul></details></div></div><div class="decl" id="Function.app"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L35-L36">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.app">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.app">Function.app</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn"><span class="fn">α</span> → <span class="fn">Sort u₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">x</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">β</span> <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">β</span> <span class="fn">x</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.app">Function.app</a> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></li></ul></details></div></div><div class="decl" id="Function.left_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L38-L38">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.left_id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.left_id">Function.left_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">id</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Function.right_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L40-L40">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.right_id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.right_id">Function.right_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">id</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Function.comp.assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L42-L42">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.comp.assoc">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.comp.assoc">Function.comp.assoc</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Sort u₃</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Sort u₄</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">φ</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span></span>) <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">h</span></span></span></span></div></div></div></div><div class="decl" id="Function.comp.left_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L44-L44">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.comp.left_id">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.comp.left_id">Function.comp.left_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">id</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Function.comp.right_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L46-L46">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.comp.right_id">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.comp.right_id">Function.comp.right_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">id</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Function.comp_const_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L48-L48">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.comp_const_right">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.comp_const_right">Function.comp_const_right</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Sort u₃</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn"><a href="../.././Init/Prelude.html#Function.const">Function.const</a> <span class="fn">α</span> <span class="fn">b</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Function.const">Function.const</a> <span class="fn">α</span> (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="Function.injective"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L51-L51">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.injective">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Prop</span></div></div><p>A function <code>f : α → β</code> is called injective if <code>f x = f y</code> implies <code>x = y</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ ⦃<span class="fn">a₁ </span>a₂ : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a₁</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">a₂</span></span></span> → <span class="fn"><span class="fn">a₁</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a₂</span></span></span></span></span></li></ul></details></div></div><div class="decl" id="Function.injective.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L53-L55">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.injective.comp">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.injective.comp">Function.injective.comp</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Sort u₃</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> (<span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="Function.surjective"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L59-L59">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.surjective">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Prop</span></div></div><p>A function <code>f : α → β</code> is calles surjective if every <code>b : β</code> is equal to <code>f a</code>
+for some <code>a : α</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn">∃ <span class="fn">a</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></span></span></li></ul></details></div></div><div class="decl" id="Function.surjective.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L61-L64">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.surjective.comp">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.surjective.comp">Function.surjective.comp</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Sort u₃</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> (<span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="Function.bijective"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L67-L67">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.bijective">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Prop</span></div></div><p>A function is called bijective if it is both injective and surjective.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span></span>)</span></li></ul></details></div></div><div class="decl" id="Function.bijective.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L69-L70">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.bijective.comp">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.bijective.comp">Function.bijective.comp</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Sort u₃</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> <span class="fn">g</span></span> → <span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> <span class="fn">f</span></span> → <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> (<span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Function.LeftInverse"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L73-L73">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.LeftInverse">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Prop</span></div></div><p><code><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">LeftInverse</a> g f</code> means that g is a left inverse to f. That is, <code>g ∘ f = <a href="../.././Init/Prelude.html#id">id</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">g</span> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">g</span> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></span></span></li></ul></details></div></div><div class="decl" id="Function.has_LeftInverse"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L76-L76">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.has_LeftInverse">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.has_LeftInverse">Function.has_LeftInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Prop</span></div></div><p><code><a href="../.././Mathlib/Init/Function.html#Function.has_LeftInverse">has_LeftInverse</a> f</code> means that <code>f</code> has an unspecified left inverse.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.has_LeftInverse">Function.has_LeftInverse</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∃ <span class="fn">finv</span>, <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">finv</span> <span class="fn">f</span></span></span></span></li></ul></details></div></div><div class="decl" id="Function.RightInverse"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L79-L79">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.RightInverse">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Prop</span></div></div><p><code><a href="../.././Mathlib/Init/Logic.html#RightInverse">RightInverse</a> g f</code> means that g is a right inverse to f. That is, <code>f ∘ g = <a href="../.././Init/Prelude.html#id">id</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">g</span> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">f</span> <span class="fn">g</span></span></span></li></ul></details></div></div><div class="decl" id="Function.has_RightInverse"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L82-L82">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.has_RightInverse">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.has_RightInverse">Function.has_RightInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Prop</span></div></div><p><code><a href="../.././Mathlib/Init/Function.html#Function.has_RightInverse">has_RightInverse</a> f</code> means that <code>f</code> has an unspecified right inverse.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.has_RightInverse">Function.has_RightInverse</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∃ <span class="fn">finv</span>, <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">finv</span> <span class="fn">f</span></span></span></span></li></ul></details></div></div><div class="decl" id="Function.LeftInverse.injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L84-L85">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.LeftInverse.injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.LeftInverse.injective">Function.LeftInverse.injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">g</span> <span class="fn">f</span></span> → <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Function.has_LeftInverse.injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L87-L88">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.has_LeftInverse.injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.has_LeftInverse.injective">Function.has_LeftInverse.injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.has_LeftInverse">Function.has_LeftInverse</a> <span class="fn">f</span></span> → <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Function.RightInverse_of_injective_of_LeftInverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L90-L93">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.RightInverse_of_injective_of_LeftInverse">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.RightInverse_of_injective_of_LeftInverse">Function.RightInverse_of_injective_of_LeftInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(injf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(lfg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">f</span> <span class="fn">g</span></span></div></div></div></div><div class="decl" id="Function.RightInverse.surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L95-L96">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.RightInverse.surjective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.RightInverse.surjective">Function.RightInverse.surjective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">g</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Function.has_RightInverse.surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L98-L99">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.has_RightInverse.surjective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.has_RightInverse.surjective">Function.has_RightInverse.surjective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.has_RightInverse">Function.has_RightInverse</a> <span class="fn">f</span></span> → <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Function.LeftInverse_of_surjective_of_RightInverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L101-L105">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.LeftInverse_of_surjective_of_RightInverse">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.LeftInverse_of_surjective_of_RightInverse">Function.LeftInverse_of_surjective_of_RightInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(surjf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rfg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">f</span> <span class="fn">g</span></span></div></div></div></div><div class="decl" id="Function.injective_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L107-L107">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.injective_id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.injective_id">Function.injective_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">id</span></span></div></div></div></div><div class="decl" id="Function.surjective_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L109-L109">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.surjective_id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.surjective_id">Function.surjective_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">id</span></span></div></div></div></div><div class="decl" id="Function.bijective_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L111-L111">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.bijective_id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.bijective_id">Function.bijective_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u₁</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> <span class="fn">id</span></span></div></div></div></div><div class="decl" id="Function.curry"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L120-L121">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.curry">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.curry">Function.curry</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Type u₃</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> → <span class="fn">φ</span></span>) → <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span></span></span></div></div><p>Interpret a function on <code>α × β</code> as a function with two arguments.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.curry">Function.curry</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">a</span>, <span class="fn">b</span>)</span></span></span></li></ul></details></div></div><div class="decl" id="Function.uncurry"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L124-L125">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.uncurry">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.uncurry">Function.uncurry</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Type u₃</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span></span>) → <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> → <span class="fn">φ</span></span></span></div></div><p>Interpret a function with two arguments as a function on <code>α × β</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.uncurry">Function.uncurry</a> <span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">a</span>.fst</span> <span class="fn"><span class="fn">a</span>.snd</span></span></span></li></ul></details></div></div><div class="decl" id="Function.curry_uncurry"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L127-L128">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.curry_uncurry">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.curry_uncurry">Function.curry_uncurry</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Type u₃</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">φ</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.curry">Function.curry</a> (<span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.uncurry">Function.uncurry</a> <span class="fn">f</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Function.uncurry_curry"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L130-L131">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.uncurry_curry">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.uncurry_curry">Function.uncurry_curry</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn">Type u₃</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> → <span class="fn">φ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.uncurry">Function.uncurry</a> (<span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.curry">Function.curry</a> <span class="fn">f</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Function.LeftInverse.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L133-L134">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.LeftInverse.id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.LeftInverse.id">Function.LeftInverse.id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">g</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">id</span></span></div></div></div></div><div class="decl" id="Function.RightInverse.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Function.lean#L136-L137">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Init/Function.html#Function.RightInverse.id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Init/Function.html#Function.RightInverse.id">Function.RightInverse.id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u₁</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u₂</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">g</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">id</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

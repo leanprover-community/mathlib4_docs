@@ -1,0 +1,35 @@
+<html lang="en" class="alectryon-standalone"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././src/alectryon.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="stylesheet" href="../../.././src/docutils_basic.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><script defer="true" src="../../.././src/alectryon.js"></script></head><body><article class="alectryon-root alectryon-centered"><div class="alectryon-banner">Built with <a href="https://github.com/leanprover/doc-gen4">doc-gen4</a>, running Lean4.
+      Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents.
+      Use <kbd>Ctrl+↑</kbd><kbd>Ctrl+↓</kbd>to navigate, <kbd>Ctrl+🖱️</kbd>to focus.
+      On Mac, use <kbd>Cmd</kbd>instead of <kbd>Ctrl</kbd>.
+    </div><pre class="alectryon-io highlight"><span class="alectryon-wsp"><span class="alectryon-token">/-
+Copyright (c) 2022 Arthur Paulino. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Arthur Paulino, Gabriel Ebner
+-/
+
+import Lean
+
+</span><span class="alectryon-token"><span class="k">open</span></span><span class="alectryon-token"> Lean.Elab.Tactic
+
+</span><span class="alectryon-token"><span class="k">namespace</span></span><span class="alectryon-token"> Mathlib.Tactic
+
+</span><span class="alectryon-token"><span class="k">/--
+`use e₁, e₂, ⋯` applies the tactic `refine ⟨e₁, e₂, ⋯, ?_⟩` and then tries
+to close the goal with `trivial` (which may or may not close it). It's
+useful, for example, to advance on existential goals, for which terms as
+well as proofs of some claims about them are expected.
+
+Examples:
+
+```lean
+example : ∃ x : Nat, x = x := by use 42
+
+example : ∃ x : Nat, ∃ y : Nat, x = y := by use 42, 42
+
+example : ∃ x : String × String, x.1 = x.2 := by use ("forty-two", "forty-two")
+```
+-/
+</span></span><span class="alectryon-token"><span class="k">macro</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><span class="k">"use "</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>es</var><b>: </b><span>Lean.Syntax.TSepArray `term ","</span></span></div></blockquote></div></small></div><span class="nv">es</span></span><span class="alectryon-token"><span class="k">:term,+ : tactic =>
+  `(tactic|(</span></span><span class="alectryon-token"><span class="k">refine</span></span><span class="alectryon-token"><span class="k"> ⟨$</span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>es</var><b>: </b><span>Lean.Syntax.TSepArray `term ","</span></span></div></blockquote></div></small></div><span class="nv">es</span></span><span class="alectryon-token"><span class="k">,*, ?_⟩; </span></span><span class="alectryon-token"><span class="k">try</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><span class="k">trivial</span></span><span class="alectryon-token"><span class="k">))</span></span><span class="alectryon-token">
+</span></span></pre></article></body></html>

@@ -1,0 +1,1 @@
+{"name":"Mathlib.Lean.Expr","instances":[],"imports":["Init","Lean","Mathlib.Lean.Expr.Basic","Mathlib.Lean.Expr.Traverse","Mathlib.Lean.Expr.ReplaceRec"],"declarations":[]}

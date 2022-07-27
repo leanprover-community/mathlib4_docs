@@ -1,0 +1,398 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.Subtype</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Data.Subtype";</script><script type="module" src="../.././nav.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Mathlib.Data.Subtype</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Mathlib.Data.Subtype</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Init/Function.html">Mathlib.Init.Function</a></li><li><a href="../.././Mathlib/Tactic/Basic.html">Mathlib.Tactic.Basic</a></li><li><a href="../.././Mathlib/Tactic/Coe.html">Mathlib.Tactic.Coe</a></li><li><a href="../.././Mathlib/Tactic/Ext.html">Mathlib.Tactic.Ext</a></li><li><a href="../.././Mathlib/Logic/Function/Basic.html">Mathlib.Logic.Function.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.Subtype" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Subtype.simps.coe">Subtype.simps.coe</a></div><div class="nav_link"><a class="break_within" href="#Subtype.prop">Subtype.prop</a></div><div class="nav_link"><a class="break_within" href="#Subtype.forall">Subtype.forall</a></div><div class="nav_link"><a class="break_within" href="#Subtype.forall'">Subtype.forall'</a></div><div class="nav_link"><a class="break_within" href="#Subtype.exists">Subtype.exists</a></div><div class="nav_link"><a class="break_within" href="#Subtype.ext">Subtype.ext</a></div><div class="nav_link"><a class="break_within" href="#Subtype.ext_iff">Subtype.ext_iff</a></div><div class="nav_link"><a class="break_within" href="#Subtype.heq_iff_coe_eq">Subtype.heq_iff_coe_eq</a></div><div class="nav_link"><a class="break_within" href="#Subtype.heq_iff_coe_heq">Subtype.heq_iff_coe_heq</a></div><div class="nav_link"><a class="break_within" href="#Subtype.ext_val">Subtype.ext_val</a></div><div class="nav_link"><a class="break_within" href="#Subtype.ext_iff_val">Subtype.ext_iff_val</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coe_eta">Subtype.coe_eta</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coe_mk">Subtype.coe_mk</a></div><div class="nav_link"><a class="break_within" href="#Subtype.mk_eq_mk">Subtype.mk_eq_mk</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coe_eq_iff">Subtype.coe_eq_iff</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coe_injective">Subtype.coe_injective</a></div><div class="nav_link"><a class="break_within" href="#Subtype.val_injective">Subtype.val_injective</a></div><div class="nav_link"><a class="break_within" href="#Subtype.restrict">Subtype.restrict</a></div><div class="nav_link"><a class="break_within" href="#Subtype.restrict_apply">Subtype.restrict_apply</a></div><div class="nav_link"><a class="break_within" href="#Subtype.restrict_def">Subtype.restrict_def</a></div><div class="nav_link"><a class="break_within" href="#Subtype.restrict_injective">Subtype.restrict_injective</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coind">Subtype.coind</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coind_injective">Subtype.coind_injective</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coind_surjective">Subtype.coind_surjective</a></div><div class="nav_link"><a class="break_within" href="#Subtype.coind_bijective">Subtype.coind_bijective</a></div><div class="nav_link"><a class="break_within" href="#Subtype.map">Subtype.map</a></div><div class="nav_link"><a class="break_within" href="#Subtype.map_comp">Subtype.map_comp</a></div><div class="nav_link"><a class="break_within" href="#Subtype.map_id">Subtype.map_id</a></div><div class="nav_link"><a class="break_within" href="#Subtype.map_injective">Subtype.map_injective</a></div><div class="nav_link"><a class="break_within" href="#Subtype.map_involutive">Subtype.map_involutive</a></div><div class="nav_link"><a class="break_within" href="#Subtype.instHasEquivSubtype">Subtype.instHasEquivSubtype</a></div><div class="nav_link"><a class="break_within" href="#Subtype.equiv_iff">Subtype.equiv_iff</a></div><div class="nav_link"><a class="break_within" href="#Subtype.refl">Subtype.refl</a></div><div class="nav_link"><a class="break_within" href="#Subtype.symm">Subtype.symm</a></div><div class="nav_link"><a class="break_within" href="#Subtype.trans">Subtype.trans</a></div><div class="nav_link"><a class="break_within" href="#Subtype.equivalence">Subtype.equivalence</a></div><div class="nav_link"><a class="break_within" href="#Subtype.instSetoidSubtype">Subtype.instSetoidSubtype</a></div><div class="nav_link"><a class="break_within" href="#Subtype.val_prop">Subtype.val_prop</a></div></nav><main>
+<div class="decl" id="Subtype.simps.coe"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L18-L18">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.simps.coe">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.simps.coe">Subtype.simps.coe</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.simps.coe">Subtype.simps.coe</a> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span>.val</span></span></li></ul></details></div></div><div class="decl" id="Subtype.prop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L20-L22">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.prop">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.prop">Subtype.prop</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <span class="fn"><span class="fn">x</span>.val</span></span></div></div><p>A version of <code>x.property</code> or <code>x.2</code> where <code>p</code> is syntactically applied to the coercion of <code>x</code>
+instead of <code>x.1</code>. A similar result is <code>Subtype.mem</code> in <code>data.set.basic</code>.</p></div></div><div class="decl" id="Subtype.forall"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L24-L26">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.forall">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.forall">Subtype.forall</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">{ <span class="fn">a</span> // <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> }</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn">x</span> : <span class="fn">{ <span class="fn">a</span> // <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> }</span>) → <span class="fn"><span class="fn">q</span> <span class="fn">x</span></span></span>) <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn">(<span class="fn">b</span> : <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span>) → <span class="fn"><span class="fn">q</span> <span class="fn">{ <span class="fn">val</span> := <span class="fn">a</span>, <span class="fn">property</span> := <span class="fn">b</span> }</span></span></span></span></span></div></div></div></div><div class="decl" id="Subtype.forall'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L30-L32">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.forall'">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.forall'">Subtype.forall'</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn">(<span class="fn">x</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> → <span class="fn">Prop</span></span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn">x</span> : <span class="fn">α</span>) → <span class="fn">(<span class="fn">h</span> : <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span>) → <span class="fn"><span class="fn">q</span> <span class="fn">x</span> <span class="fn">h</span></span></span></span>) <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">(<span class="fn">x</span> : <span class="fn">{ <span class="fn">a</span> // <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> }</span>) → <span class="fn"><span class="fn">q</span> <span class="fn"><span class="fn">x</span>.val</span> <span class="fn"><span class="fn">x</span>.property</span></span></span></span></div></div><p>An alternative version of <code><a href="../.././Mathlib/Data/Subtype.html#Subtype.forall">Subtype.forall</a></code>. This one is useful if Lean cannot figure out <code>q</code>
+when using <code><a href="../.././Mathlib/Data/Subtype.html#Subtype.forall">Subtype.forall</a></code> from right to left.</p></div></div><div class="decl" id="Subtype.exists"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L34-L36">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.exists">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.exists">Subtype.exists</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">{ <span class="fn">a</span> // <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> }</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∃ <span class="fn">x</span>, <span class="fn"><span class="fn">q</span> <span class="fn">x</span></span></span>) <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">a </span><span class="fn">b</span>, <span class="fn"><span class="fn">q</span> <span class="fn">{ <span class="fn">val</span> := <span class="fn">a</span>, <span class="fn">property</span> := <span class="fn">b</span> }</span></span></span></span></div></div></div></div><div class="decl" id="Subtype.ext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L38-L39">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.ext">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.ext">Subtype.ext</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a1 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a2 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a1</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a2</span>.val</span></span> → <span class="fn"><span class="fn">a1</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a2</span></span></span></div></div></div></div><div class="decl" id="Subtype.ext_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L41-L42">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.ext_iff">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.ext_iff">Subtype.ext_iff</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a1 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a2 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a1</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a2</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a1</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a2</span>.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.heq_iff_coe_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L44-L47">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.heq_iff_coe_eq">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.heq_iff_coe_eq">Subtype.heq_iff_coe_eq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">q</span> <span class="fn">x</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a1 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a2 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">q</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#HEq">HEq</a> <span class="fn">a1</span> <span class="fn">a2</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a1</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a2</span>.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.heq_iff_coe_heq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L49-L55">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.heq_iff_coe_heq">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.heq_iff_coe_heq">Subtype.heq_iff_coe_heq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">{ <span class="fn">y</span> // <span class="fn"><span class="fn">q</span> <span class="fn">y</span></span> }</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h' : <span class="fn"><a href="../.././Init/Prelude.html#HEq">HEq</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#HEq">HEq</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Init/Prelude.html#HEq">HEq</a> <span class="fn"><span class="fn">a</span>.val</span> <span class="fn"><span class="fn">b</span>.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.ext_val"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L57-L58">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.ext_val">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.ext_val">Subtype.ext_val</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a1 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a2 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a1</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a2</span>.val</span></span> → <span class="fn"><span class="fn">a1</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a2</span></span></span></div></div></div></div><div class="decl" id="Subtype.ext_iff_val"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L60-L61">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.ext_iff_val">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.ext_iff_val">Subtype.ext_iff_val</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a1 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a2 : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a1</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a2</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a1</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a2</span>.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.coe_eta"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L63-L63">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coe_eta">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coe_eta">Subtype.coe_eta</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">{ <span class="fn">a</span> // <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> <span class="fn"><span class="fn">a</span>.val</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn">a</span>.val</span>, <span class="fn">property</span> := <span class="fn">h</span> }</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Subtype.coe_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L65-L65">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coe_mk">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coe_mk">Subtype.coe_mk</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">{ <span class="fn">val</span> := <span class="fn">a</span>, <span class="fn">property</span> := <span class="fn">h</span> }</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Subtype.mk_eq_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L67-L68">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.mk_eq_mk">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.mk_eq_mk">Subtype.mk_eq_mk</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{h : <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{h' : <span class="fn"><span class="fn">p</span> <span class="fn">a'</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">{ <span class="fn">val</span> := <span class="fn">a</span>, <span class="fn">property</span> := <span class="fn">h</span> }</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">val</span> := <span class="fn">a'</span>, <span class="fn">property</span> := <span class="fn">h'</span> }</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span></span></div></div></div></div><div class="decl" id="Subtype.coe_eq_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L70-L71">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coe_eq_iff">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coe_eq_iff">Subtype.coe_eq_iff</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">{ <span class="fn">a</span> // <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">h</span>, <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">val</span> := <span class="fn">b</span>, <span class="fn">property</span> := <span class="fn">h</span> }</span></span></span></span></div></div></div></div><div class="decl" id="Subtype.coe_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L73-L75">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coe_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coe_injective">Subtype.coe_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">a</span>.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.val_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L77-L78">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.val_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.val_injective">Subtype.val_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">Subtype.val</span></span></div></div></div></div><div class="decl" id="Subtype.restrict"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L81-L82">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.restrict">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.restrict">Subtype.restrict</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn"><span class="fn">α</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">x</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">β</span> <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">β</span> <span class="fn"><span class="fn">x</span>.val</span></span></div></div><p>Restrict a (dependent) function to a subtype</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.restrict">Subtype.restrict</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span>.val</span></span></span></li></ul></details></div></div><div class="decl" id="Subtype.restrict_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L84-L85">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.restrict_apply">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.restrict_apply">Subtype.restrict_apply</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn"><span class="fn">α</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">x</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">β</span> <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.restrict">Subtype.restrict</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span>.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.restrict_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L87-L87">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.restrict_def">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.restrict_def">Subtype.restrict_def</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.restrict">Subtype.restrict</a> <span class="fn">f</span> <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Subtype.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.restrict_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L89-L91">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.restrict_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.restrict_injective">Subtype.restrict_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> (<span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.restrict">Subtype.restrict</a> <span class="fn">f</span> <span class="fn">p</span></span>)</span></div></div></div></div><div class="decl" id="Subtype.coind"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L94-L95">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coind">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coind">Subtype.coind</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">p</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span></span></div></div><p>Defining a map into a subtype, this can be seen as an "coinduction principle" of <code><a href="../.././Init/Prelude.html#Subtype">Subtype</a></code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.coind">Subtype.coind</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>, <span class="fn">property</span> := <span class="fn"><span class="fn">h</span> <span class="fn">a</span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Subtype.coind_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L97-L101">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coind_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coind_injective">Subtype.coind_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">p</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> (<span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.coind">Subtype.coind</a> <span class="fn">f</span> <span class="fn">h</span></span>)</span></div></div></div></div><div class="decl" id="Subtype.coind_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L103-L106">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coind_surjective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coind_surjective">Subtype.coind_surjective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">p</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> (<span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.coind">Subtype.coind</a> <span class="fn">f</span> <span class="fn">h</span></span>)</span></div></div></div></div><div class="decl" id="Subtype.coind_bijective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L108-L110">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.coind_bijective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.coind_bijective">Subtype.coind_bijective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">p</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> (<span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.coind">Subtype.coind</a> <span class="fn">f</span> <span class="fn">h</span></span>)</span></div></div></div></div><div class="decl" id="Subtype.map"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L113-L115">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.map">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">q</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span> → <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">q</span></span></span></div></div><p>Restriction of a function to a function on subtypes.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span>.val</span></span>, <span class="fn">property</span> := <span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map.proof_1">Subtype.map.proof_1</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">x</span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Subtype.map_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L117-L120">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.map_comp">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.map_comp">Subtype.map_comp</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Sort u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">γ</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">q</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l : <span class="fn">(<span class="fn">a</span> : <span class="fn">β</span>) → <span class="fn"><span class="fn"><span class="fn">q</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">r</span> (<span class="fn"><span class="fn">g</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a> <span class="fn">g</span> <span class="fn">l</span> (<span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">x</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a> (<span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>) (<span class="fn">fun <span class="fn">a</span> <span class="fn">ha</span> =&gt <span class="fn"><span class="fn">l</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">h</span> <span class="fn">a</span> <span class="fn">ha</span></span>)</span></span>) <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="Subtype.map_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L122-L123">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.map_id">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.map_id">Subtype.map_id</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">p</span> (<span class="fn"><a href="../.././Init/Prelude.html#id">id</a> <span class="fn">a</span></span>)</span></span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a> <span class="fn">id</span> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">id</span></span></div></div></div></div><div class="decl" id="Subtype.map_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L125-L127">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.map_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.map_injective">Subtype.map_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">q</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> (<span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a> <span class="fn">f</span> <span class="fn">h</span></span>)</span></div></div></div></div><div class="decl" id="Subtype.map_involutive"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L129-L131">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.map_involutive">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.map_involutive">Subtype.map_involutive</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">p</span> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Logic/Function/Basic.html#Function.involutive">Function.involutive</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Basic.html#Function.involutive">Function.involutive</a> (<span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.map">Subtype.map</a> <span class="fn">f</span> <span class="fn">h</span></span>)</span></div></div></div></div><div class="decl" id="Subtype.instHasEquivSubtype"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L133-L134">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.instHasEquivSubtype">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.instHasEquivSubtype">Subtype.instHasEquivSubtype</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#HasEquiv">HasEquiv</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#HasEquiv">HasEquiv</a> (<span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.instHasEquivSubtype">Subtype.instHasEquivSubtype</a> <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">Equiv</span> := <span class="fn">fun <span class="fn">s</span> <span class="fn">t</span> =&gt <span class="fn"><span class="fn"><span class="fn">s</span>.val</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn"><span class="fn">t</span>.val</span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Subtype.equiv_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L146-L148">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.equiv_iff">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.equiv_iff">Subtype.equiv_iff</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#HasEquiv">HasEquiv</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">t</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">s</span>.val</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn"><span class="fn">t</span>.val</span></span></span></div></div></div></div><div class="decl" id="Subtype.refl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L152-L153">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.refl">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.refl">Subtype.refl</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#Setoid">Setoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">s</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Subtype.symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L155-L156">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.symm">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.symm">Subtype.symm</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#Setoid">Setoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">s</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">t</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Subtype.trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L158-L159">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.trans">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.trans">Subtype.trans</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#Setoid">Setoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">s</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">t</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">s</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="Subtype.equivalence"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L161-L162">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.equivalence">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.equivalence">Subtype.equivalence</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#Setoid">Setoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Equivalence">Equivalence</a> <span class="fn">HasEquiv.Equiv</span></span></div></div></div></div><div class="decl" id="Subtype.instSetoidSubtype"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L164-L165">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.instSetoidSubtype">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.instSetoidSubtype">Subtype.instSetoidSubtype</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#Setoid">Setoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Setoid">Setoid</a> (<span class="fn"><a href="../.././Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Subtype.html#Subtype.instSetoidSubtype">Subtype.instSetoidSubtype</a> <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">r</span> := <span class="fn">fun <span class="fn">a</span> <span class="fn">a_1</span> =&gt <span class="fn"><span class="fn">a</span> <a href="../.././Init/Core.html#HasEquiv.Equiv">≈</a> <span class="fn">a_1</span></span></span>, <span class="fn">iseqv</span> := (_ : <span class="fn"><a href="../.././Init/Core.html#Equivalence">Equivalence</a> <span class="fn">HasEquiv.Equiv</span></span>) }</span></span></li></ul></details></div></div><div class="mod_doc"><p>Some facts about sets, which require that <code>α</code> is a type.</p></div><div class="decl" id="Subtype.val_prop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Subtype.lean#L174-L174">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Subtype.html#Subtype.val_prop">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Subtype.html#Subtype.val_prop">Subtype.val_prop</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">{ <span class="fn">a</span> // <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span>.val</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

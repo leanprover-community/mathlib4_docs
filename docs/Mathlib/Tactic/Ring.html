@@ -1,0 +1,480 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Tactic.Ring</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Tactic.Ring";</script><script type="module" src="../.././nav.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Mathlib.Tactic.Ring</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Mathlib.Tactic.Ring</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Tactic/NormNum.html">Mathlib.Tactic.NormNum</a></li><li><a href="../.././Lean/Elab/Tactic/Basic.html">Lean.Elab.Tactic.Basic</a></li><li><a href="../.././Mathlib/Algebra/Ring/Basic.html">Mathlib.Algebra.Ring.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Tactic.Ring" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.Cache">Tactic.Ring.Cache</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.State">Tactic.Ring.State</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.State.numAtoms">Tactic.Ring.State.numAtoms</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.RingM">Tactic.Ring.RingM</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.RingM.run">Tactic.Ring.RingM.run</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.mkAppCS">Tactic.Ring.mkAppCS</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.addAtom">Tactic.Ring.addAtom</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner">Tactic.Ring.horner</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.instInhabitedHornerExpr">Tactic.Ring.instInhabitedHornerExpr</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.HornerExpr.e">Tactic.Ring.HornerExpr.e</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.HornerExpr.instCoeHornerExprExpr">Tactic.Ring.HornerExpr.instCoeHornerExprExpr</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.HornerExpr.isZero">Tactic.Ring.HornerExpr.isZero</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.HornerExpr.xadd'">Tactic.Ring.HornerExpr.xadd'</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.HornerExpr.reflConv">Tactic.Ring.HornerExpr.reflConv</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.HornerExpr.pp">Tactic.Ring.HornerExpr.pp</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.zero_horner">Tactic.Ring.zero_horner</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_horner">Tactic.Ring.horner_horner</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.evalHorner">Tactic.Ring.evalHorner</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.const_add_horner">Tactic.Ring.const_add_horner</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_add_const">Tactic.Ring.horner_add_const</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_add_horner_lt">Tactic.Ring.horner_add_horner_lt</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_add_horner_gt">Tactic.Ring.horner_add_horner_gt</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_add_horner_eq">Tactic.Ring.horner_add_horner_eq</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.evalAdd">Tactic.Ring.evalAdd</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_const_mul">Tactic.Ring.horner_const_mul</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_mul_const">Tactic.Ring.horner_mul_const</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.evalConstMul">Tactic.Ring.evalConstMul</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_mul_horner_zero">Tactic.Ring.horner_mul_horner_zero</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_mul_horner">Tactic.Ring.horner_mul_horner</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.evalMul">Tactic.Ring.evalMul</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_pow">Tactic.Ring.horner_pow</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.pow_succ_eq">Tactic.Ring.pow_succ_eq</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.evalPow">Tactic.Ring.evalPow</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.horner_atom">Tactic.Ring.horner_atom</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.evalAtom">Tactic.Ring.evalAtom</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.subst_into_add">Tactic.Ring.subst_into_add</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.subst_into_mul">Tactic.Ring.subst_into_mul</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.subst_into_pow">Tactic.Ring.subst_into_pow</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.eval">Tactic.Ring.eval</a></div><div class="nav_link"><a class="break_within" href="#Tactic.Ring.tacticRing">Tactic.Ring.tacticRing</a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="ring"><code>ring</code> <a class="hover-link" href="#ring">#</a></h1><p>Evaluate expressions in the language of commutative (semi)rings.
+Based on <a href="http://www.cs.ru.nl/~freek/courses/tt-2014/read/10.1.1.61.3041.pdf">http://www.cs.ru.nl/~freek/courses/tt-2014/read/10.1.1.61.3041.pdf</a> .</p></div><div class="decl" id="Tactic.Ring.Cache"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L23-L26">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.Cache">ink</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.Cache">Tactic.Ring.Cache</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><ul class="structure_fields" id="Tactic.Ring.Cache.mk"><li id="Tactic.Ring.Cache.α" class="structure_field"><div class="structure_field_info">α : <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></div></li><li id="Tactic.Ring.Cache.univ" class="structure_field"><div class="structure_field_info">univ : <a href="../.././Lean/Level.html#Lean.Level">Lean.Level</a></div></li><li id="Tactic.Ring.Cache.cs" class="structure_field"><div class="structure_field_info">cs : <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></div></li></ul><p>This cache contains data required by the <code>ring</code> tactic during execution.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Tactic.Ring.Cache" class="instances-for-list"></ul></details></div></div><div class="decl" id="Tactic.Ring.State"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L28-L29">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.State">ink</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.State">Tactic.Ring.State</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><ul class="structure_fields" id="Tactic.Ring.State.mk"><li id="Tactic.Ring.State.atoms" class="structure_field"><div class="structure_field_info">atoms : <span class="fn"><a href="../.././Init/Prelude.html#Array">Array</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span></div></li></ul><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Tactic.Ring.State" class="instances-for-list"></ul></details></div></div><div class="decl" id="Tactic.Ring.State.numAtoms"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L31-L31">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.State.numAtoms">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.State.numAtoms">Tactic.Ring.State.numAtoms</a></span><span class="decl_args">
+<span class="fn">(s : <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.State">Tactic.Ring.State</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././Init/Prelude.html#Nat">ℕ</a></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.State.numAtoms">Tactic.Ring.State.numAtoms</a> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Array.size">Array.size</a> <span class="fn"><span class="fn">s</span>.atoms</span></span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.RingM"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L35-L35">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a></span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Type</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><p>The monad that <code>ring</code> works in. This is a reader monad containing a cache and
+the list of atoms-up-to-defeq encountered thus far, used for atom sorting.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.Cache">Tactic.Ring.Cache</a> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <a href="../.././Init/System/IO.html#IO.RealWorld">IO.RealWorld</a> <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.State">Tactic.Ring.State</a> <a href="../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a></span>)</span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.RingM.run"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L37-L40">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.RingM.run">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM.run">Tactic.Ring.RingM.run</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ty : <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Tactic.Ring.mkAppCS"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L42-L44">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.mkAppCS">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.mkAppCS">Tactic.Ring.mkAppCS</a></span><span class="decl_args">
+<span class="fn">(f : <a href="../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(args : <span class="fn"><a href="../.././Init/Prelude.html#Array">Array</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.mkAppCS">Tactic.Ring.mkAppCS</a> <span class="fn">f</span> <span class="fn">args</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let c ← <span class="fn">read</span>
+  <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="../.././Lean/Expr.html#Lean.mkAppN">Lean.mkAppN</a> (<span class="fn"><a href="../.././Lean/Expr.html#Lean.mkConst">Lean.mkConst</a> <span class="fn">f</span> <span class="fn">[<span class="fn"><span class="fn">c</span>.univ</span>]</span></span>) (<span class="fn"><span class="fn">#[<span class="fn"><span class="fn">c</span>.α</span>, <span class="fn"><span class="fn">c</span>.cs</span>]</span> <a href="../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">args</span></span>)</span>)</span></span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.addAtom"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L48-L55">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.addAtom">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.addAtom">Tactic.Ring.addAtom</a></span><span class="decl_args">
+<span class="fn">(e : <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span></div></div><p>Get the index corresponding to an atomic expression, if it has already been encountered, or
+put it in the list of atoms and return the new index, otherwise.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Tactic.Ring.horner"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L62-L62">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p>The normal form that <code>ring</code> uses is mediated by the function <code><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">horner</a> a x n b := a * x ^ n + b</code>.
+The reason we use a definition rather than the (more readable) expression on the right is because
+this expression contains a number of typeclass arguments in different positions, while <code><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">horner</a></code>
+contains only one <code><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a></code> instance at the top level. See also <code><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">HornerExpr</a></code> for a
+description of normal form.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span></span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.HornerExpr"><div class="inductive"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L84-L86">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">ink</a></div><div class="decl_header"><span class="decl_kind">inductive</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><ul class="constructors"><li class="constructor" id="Tactic.Ring.HornerExpr.const">const: <span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> → <span class="fn"><a href="../.././Init/Prelude.html#Nat">ℕ</a> → <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a></span></span></li><li class="constructor" id="Tactic.Ring.HornerExpr.xadd">xadd: <span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <span class="fn"><span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span> → <span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a></span></span></span></span></li></ul><p>Every expression in the language of commutative semirings can be viewed as a sum of monomials,
+where each monomial is a product of powers of atoms. We fix a global order on atoms (up to
+definitional equality), and then separate the terms according to their smallest atom. So the top
+level expression is <code>a * x^n + b</code> where <code>x</code> is the smallest atom and <code>n > 0</code> is a numeral, and
+<code>n</code> is maximal (so <code>a</code> contains at least one monomial not containing an <code>x</code>), and <code>b</code> contains no
+monomials with an <code>x</code> (hence all atoms in <code>b</code> are larger than <code>x</code>).</p><p>If there is no <code>x</code> satisfying these constraints, then the expression must be a numeral. Even though
+we are working over rings, we allow rational constants when these can be interpreted in the ring,
+so we can solve problems like <code>x / 3 = 1 / 3 * x</code> even though these are not technically in the
+language of rings.</p><p>These constraints ensure that there is a unique normal form for each ring expression, and so the
+algorithm is simply to calculate the normal form of each side and compare for equality.</p><p>To allow us to efficiently pattern match on normal forms, we maintain this inductive type that
+holds a normalized expression together with its structure. All the <code>Expr</code>s in this type could be
+removed without loss of information, and conversely the <code>horner_expr</code> structure and the <code>ℕ</code> and
+<code>ℚ</code> values can be recovered from the top level <code>Expr</code>, but we keep both in order to keep proof
+producing normalization functions efficient.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Tactic.Ring.HornerExpr" class="instances-for-list"></ul></details></div></div><div class="decl" id="Tactic.Ring.instInhabitedHornerExpr"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L88-L88">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.instInhabitedHornerExpr">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.instInhabitedHornerExpr">Tactic.Ring.instInhabitedHornerExpr</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Inhabited">Inhabited</a> <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.instInhabitedHornerExpr">Tactic.Ring.instInhabitedHornerExpr</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">default</span> := <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.const">Tactic.Ring.HornerExpr.const</a> (<span class="fn"><a href="../.././Lean/Expr.html#Lean.mkRawNatLit">Lean.mkRawNatLit</a> <span class="fn">0</span></span>) <span class="fn">0</span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.HornerExpr.e"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L95-L97">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.e">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.e">Tactic.Ring.HornerExpr.e</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span></div></div><p>Get the expression corresponding to a <code><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">HornerExpr</a></code>. This can be calculated recursively from
+the structure, but we cache the exprs in all subterms so that this function can be computed in
+constant time.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.e">Tactic.Ring.HornerExpr.e</a> <span class="fn">_fun_discr</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.const">Tactic.Ring.HornerExpr.const</a> <span class="fn">e</span> <span class="fn">coeff</span></span> =&gt <span class="fn">e</span>
+  | <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.xadd">Tactic.Ring.HornerExpr.xadd</a> <span class="fn">e</span> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b</span></span> =&gt <span class="fn">e</span></span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.HornerExpr.instCoeHornerExprExpr"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L99-L99">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.instCoeHornerExprExpr">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.instCoeHornerExprExpr">Tactic.Ring.HornerExpr.instCoeHornerExprExpr</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Coe.html#Coe">Coe</a> <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.instCoeHornerExprExpr">Tactic.Ring.HornerExpr.instCoeHornerExprExpr</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">coe</span> := <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.e">Tactic.Ring.HornerExpr.e</a> }</span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.HornerExpr.isZero"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L102-L104">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.isZero">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.isZero">Tactic.Ring.HornerExpr.isZero</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <a href="../.././Init/Prelude.html#Bool">Bool</a></span></div></div><p>Is this expr the constant <code>0</code>?</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.isZero">Tactic.Ring.HornerExpr.isZero</a> <span class="fn">_fun_discr</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.const">Tactic.Ring.HornerExpr.const</a> <span class="fn">e</span> <span class="fn">c</span></span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span>
+  | <span class="fn">x</span> =&gt <span class="fn">false</span></span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.HornerExpr.xadd'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L107-L108">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.xadd'">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.xadd'">Tactic.Ring.HornerExpr.xadd'</a></span><span class="decl_args">
+<span class="fn">(a : <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a></span></div></div><p>Construct a <code>xadd</code> node</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Tactic.Ring.HornerExpr.reflConv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L111-L111">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.reflConv">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.reflConv">Tactic.Ring.HornerExpr.reflConv</a></span><span class="decl_args">
+<span class="fn">(e : <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></div></div><p>Reflexivity conversion for a <code><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">HornerExpr</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.reflConv">Tactic.Ring.HornerExpr.reflConv</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><a href="../.././Init/Prelude.html#liftM">liftM</a> (<span class="fn"><a href="../.././Lean/Meta/AppBuilder.html#Lean.Meta.mkEqRefl">Lean.Meta.mkEqRefl</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.e">Tactic.Ring.HornerExpr.e</a> <span class="fn">e</span></span>)</span>)</span>
+  <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">e</span>, <span class="fn">a</span>)</span></span></span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.HornerExpr.pp"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L114-L120">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.pp">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.pp">Tactic.Ring.HornerExpr.pp</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <span class="fn"><a href="../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <a href="../.././Init/Data/Format/Basic.html#Std.Format">Lean.Format</a></span></span></div></div><p>Pretty printer for <code>horner_expr</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.pp">Tactic.Ring.HornerExpr.pp</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr.const">Tactic.Ring.HornerExpr.const</a> <span class="fn">e</span> <span class="fn">c</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="../.././Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> (<span class="fn"><a href="../.././Init/Data/ToString/Basic.html#ToString.toString">toString</a> <span class="fn">c</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Tactic.Ring.zero_horner"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L126-L128">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.zero_horner">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.zero_horner">Tactic.Ring.zero_horner</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">0</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_horner"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L130-L133">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_horner">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_horner">Tactic.Ring.horner_horner</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₁ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₂ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n' : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">n₁</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">n'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">0</span></span>) <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n'</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.evalHorner"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L136-L147">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.evalHorner">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.evalHorner">Tactic.Ring.evalHorner</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> →
+  <span class="fn"><span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span> → <span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span></span></span></div></div><p>Evaluate <code><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">horner</a> a n x b</code> where <code>a</code> and <code>b</code> are already in normal form.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Tactic.Ring.const_add_horner"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L150-L153">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.const_add_horner">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.const_add_horner">Tactic.Ring.const_add_horner</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(k : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">k</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">k</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b'</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_add_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L155-L158">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_const">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_const">Tactic.Ring.horner_add_const</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b'</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_add_horner_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L160-L165">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_horner_lt">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_horner_lt">Tactic.Ring.horner_add_horner_lt</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₁ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₂ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">n₁</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">n₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">a₁</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₂</span> <span class="fn">x</span> <span class="fn">k</span> <span class="fn">0</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn"><span class="fn">b₁</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">b₁</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₂</span> <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">b₂</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a'</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">b'</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_add_horner_gt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L167-L172">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_horner_gt">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_horner_gt">Tactic.Ring.horner_add_horner_gt</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₁ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₂ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">n₂</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">n₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">k</span> <span class="fn">0</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn"><span class="fn">b₁</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">b₁</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₂</span> <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">b₂</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a'</span> <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">b'</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_add_horner_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L174-L179">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_horner_eq">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_add_horner_eq">Tactic.Ring.horner_add_horner_eq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">a₁</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">b₁</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a'</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b'</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b₁</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₂</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b₂</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.evalAdd"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L181-L234">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.evalAdd">ink</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.evalAdd">Tactic.Ring.evalAdd</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_const_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L237-L240">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_const_mul">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_const_mul">Tactic.Ring.horner_const_mul</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a'</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b'</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_mul_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L242-L245">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_mul_const">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_mul_const">Tactic.Ring.horner_mul_const</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a'</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">b'</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.evalConstMul"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L248-L256">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.evalConstMul">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.evalConstMul">Tactic.Ring.evalConstMul</a></span><span class="decl_args">
+<span class="fn">(k : <span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span></div></div><p>Evaluate <code>k * a</code> where <code>k</code> is a rational numeral and <code>a</code> is in normal form.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Tactic.Ring.horner_mul_horner_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L259-L265">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_mul_horner_zero">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_mul_horner_zero">Tactic.Ring.horner_mul_horner_zero</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₁ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₂ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(aa : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">b₁</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">aa</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">aa</span> <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">0</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">b₁</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₂</span> <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">0</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.horner_mul_horner"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L267-L276">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_mul_horner">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_mul_horner">Tactic.Ring.horner_mul_horner</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₁ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₁ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n₂ : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b₂ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(aa : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(haa : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ab : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(bb : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">b₁</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">aa</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">aa</span> <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">0</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">haa</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn"><span class="fn">a₁</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">ab</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₄ : <span class="fn"><span class="fn"><span class="fn">b₁</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b₂</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">bb</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">haa</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">ab</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">bb</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₁</span> <span class="fn">x</span> <span class="fn">n₁</span> <span class="fn">b₁</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a₂</span> <span class="fn">x</span> <span class="fn">n₂</span> <span class="fn">b₂</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.evalMul"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L279-L320">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.evalMul">ink</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.evalMul">Tactic.Ring.evalMul</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span></div></div><p>Evaluate <code>a * b</code> where <code>a</code> and <code>b</code> are in normal form.</p></div></div><div class="decl" id="Tactic.Ring.horner_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L323-L326">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_pow">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_pow">Tactic.Ring.horner_pow</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n' : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">n'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a</span> <span class="fn">x</span> <span class="fn">n</span> <span class="fn">0</span></span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">a'</span> <span class="fn">x</span> <span class="fn">n'</span> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.pow_succ_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L328-L330">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.pow_succ_eq">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.pow_succ_eq">Tactic.Ring.pow_succ_eq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.evalPow"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L333-L357">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.evalPow">ink</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.evalPow">Tactic.Ring.evalPow</a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> → <span class="fn"><span class="fn"><a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a></span> → <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span></span></div></div><p>Evaluate <code>a ^ n</code> where <code>a</code> is in normal form and <code>n</code> is a natural numeral.</p></div></div><div class="decl" id="Tactic.Ring.horner_atom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L360-L361">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.horner_atom">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner_atom">Tactic.Ring.horner_atom</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Basic.html#CommSemiring">CommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.horner">Tactic.Ring.horner</a> <span class="fn">1</span> <span class="fn">x</span> <span class="fn">1</span> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Tactic.Ring.evalAtom"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L364-L368">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.evalAtom">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.evalAtom">Tactic.Ring.evalAtom</a></span><span class="decl_args">
+<span class="fn">(e : <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></div></div><p>Evaluate <code>a</code> where <code>a</code> is an atom.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Tactic.Ring.subst_into_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L370-L372">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.subst_into_add">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.subst_into_add">Tactic.Ring.subst_into_add</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(tl : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(tr : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prl : <span class="fn"><span class="fn">l</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">tl</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prr : <span class="fn"><span class="fn">r</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">tr</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prt : <span class="fn"><span class="fn"><span class="fn">tl</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">tr</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">l</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">r</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.subst_into_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L374-L376">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.subst_into_mul">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.subst_into_mul">Tactic.Ring.subst_into_mul</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(tl : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(tr : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prl : <span class="fn"><span class="fn">l</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">tl</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prr : <span class="fn"><span class="fn">r</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">tr</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prt : <span class="fn"><span class="fn"><span class="fn">tl</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">tr</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">l</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.subst_into_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L378-L380">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.subst_into_pow">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.subst_into_pow">Tactic.Ring.subst_into_pow</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(tl : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(tr : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prl : <span class="fn"><span class="fn">l</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">tl</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prr : <span class="fn"><span class="fn">r</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">tr</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(prt : <span class="fn"><span class="fn"><span class="fn">tl</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">tr</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">l</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">r</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Tactic.Ring.eval"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L382-L409">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.eval">ink</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.eval">Tactic.Ring.eval</a></span><span class="decl_args">
+<span class="fn">(e : <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.RingM">Tactic.Ring.RingM</a> (<span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.HornerExpr">Tactic.Ring.HornerExpr</a> <a href="../.././Init/Prelude.html#Prod">×</a> <a href="../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></div></div></div></div><div class="decl" id="Tactic.Ring.tacticRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Ring.lean#L411-L411">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Ring.html#Tactic.Ring.tacticRing">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.tacticRing">Tactic.Ring.tacticRing</a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././Mathlib/Tactic/Ring.html#Tactic.Ring.tacticRing">Tactic.Ring.tacticRing</a> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Tactic.Ring.tacticRing</span> <span class="fn">1024</span> (<span class="fn"><a href="../.././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotring&quot</span> <a href="../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

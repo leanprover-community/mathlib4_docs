@@ -1,0 +1,1 @@
+{"name":"Mathlib.Tactic.Coe","instances":[],"imports":["Init","Lean"],"declarations":[{"sourceLink":"https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Coe.lean#L16-L16","name":"Lean.Elab.Term.CoeImpl.«term(↑)»","docLink":"./Mathlib/Tactic/Coe.html#Lean.Elab.Term.CoeImpl.«term(↑)»","doc":""}]}

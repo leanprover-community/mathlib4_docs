@@ -1,0 +1,34 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Tactic.Replace</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Tactic.Replace";</script><script type="module" src="../.././nav.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Mathlib.Tactic.Replace</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Mathlib.Tactic.Replace</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Replace.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Lean.html">Lean</a></li><li><a href="../.././Mathlib/Tactic/Have.html">Mathlib.Tactic.Have</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Tactic.Replace" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Mathlib.Tactic.tacticReplace_">Mathlib.Tactic.tacticReplace_</a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Tactic.replace'">Mathlib.Tactic.replace'</a></div></nav><main>
+<div class="decl" id="Mathlib.Tactic.tacticReplace_"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Replace.lean#L13-L42">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Replace.html#Mathlib.Tactic.tacticReplace_">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Replace.html#Mathlib.Tactic.tacticReplace_">Mathlib.Tactic.tacticReplace_</a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Acts like <code>have</code>, but removes a hypothesis with the same name as
+this one if possible. For example, if the state is:</p><pre><code class="language-lean">f : α → β
+h : α
+⊢ goal
+</code></pre><p>Then after <code>replace h := f h</code> the state will be:</p><pre><code class="language-lean">f : α → β
+h : β
+⊢ goal
+</code></pre><p>whereas <code>have h := f h</code> would result in:</p><pre><code class="language-lean">f : α → β
+h† : α
+h : β
+⊢ goal
+</code></pre><p>This can be used to simulate the <code>specialize</code> and <code>apply at</code> tactics of Coq.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Mathlib.Tactic.replace'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Tactic/Replace.lean#L58-L89">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Tactic/Replace.html#Mathlib.Tactic.replace'">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/Replace.html#Mathlib.Tactic.replace'">Mathlib.Tactic.replace'</a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Acts like <code>have</code>, but removes a hypothesis with the same name as
+this one if possible. For example, if the state is:</p><p>Then after <code>replace h : β</code> the state will be:</p><pre><code class="language-lean">case h
+f : α → β
+h : α
+⊢ β
+
+f : α → β
+h : β
+⊢ goal
+</code></pre><p>whereas <code>have h : β</code> would result in:</p><pre><code class="language-lean">case h
+f : α → β
+h : α
+⊢ β
+
+f : α → β
+h✝ : α
+h : β
+⊢ goal
+</code></pre><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

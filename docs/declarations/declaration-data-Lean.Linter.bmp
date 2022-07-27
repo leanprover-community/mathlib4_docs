@@ -1,0 +1,1 @@
+{"name":"Lean.Linter","instances":[],"imports":["Init","Lean.Linter.Basic","Lean.Linter.Util"],"declarations":[]}

@@ -1,0 +1,437 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Lean.Util.MonadCache</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Lean.Util.MonadCache";</script><script type="module" src="../.././nav.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Lean.Util.MonadCache</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Lean.Util.MonadCache</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Std/Data/HashMap.html">Std.Data.HashMap</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Lean.Util.MonadCache" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCache">Lean.MonadCache</a></div><div class="nav_link"><a class="break_within" href="#Lean.checkCache">Lean.checkCache</a></div><div class="nav_link"><a class="break_within" href="#Lean.instMonadCacheReaderT">Lean.instMonadCacheReaderT</a></div><div class="nav_link"><a class="break_within" href="#Lean.instMonadCacheExceptT">Lean.instMonadCacheExceptT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadHashMapCacheAdapter">Lean.MonadHashMapCacheAdapter</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadHashMapCacheAdapter.findCached?">Lean.MonadHashMapCacheAdapter.findCached?</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadHashMapCacheAdapter.cache">Lean.MonadHashMapCacheAdapter.cache</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadHashMapCacheAdapter.instMonadCache">Lean.MonadHashMapCacheAdapter.instMonadCache</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT">Lean.MonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instMonadHashMapCacheAdapterMonadCacheT">Lean.MonadCacheT.instMonadHashMapCacheAdapterMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.run">Lean.MonadCacheT.run</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instMonadMonadCacheT">Lean.MonadCacheT.instMonadMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instMonadLiftMonadCacheT">Lean.MonadCacheT.instMonadLiftMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instMonadExceptOfMonadCacheT">Lean.MonadCacheT.instMonadExceptOfMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instMonadControlMonadCacheT">Lean.MonadCacheT.instMonadControlMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instMonadFinallyMonadCacheT">Lean.MonadCacheT.instMonadFinallyMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instMonadRefMonadCacheT">Lean.MonadCacheT.instMonadRefMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadCacheT.instAlternativeMonadCacheT">Lean.MonadCacheT.instAlternativeMonadCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.instMonadHashMapCacheAdapterMonadStateCacheT">Lean.MonadStateCacheT.instMonadHashMapCacheAdapterMonadStateCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.run">Lean.MonadStateCacheT.run</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.instMonadMonadStateCacheT">Lean.MonadStateCacheT.instMonadMonadStateCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.instMonadLiftMonadStateCacheT">Lean.MonadStateCacheT.instMonadLiftMonadStateCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT">Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.instMonadControlMonadStateCacheT">Lean.MonadStateCacheT.instMonadControlMonadStateCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.instMonadFinallyMonadStateCacheT">Lean.MonadStateCacheT.instMonadFinallyMonadStateCacheT</a></div><div class="nav_link"><a class="break_within" href="#Lean.MonadStateCacheT.instMonadRefMonadStateCacheT">Lean.MonadStateCacheT.instMonadRefMonadStateCacheT</a></div></nav><main>
+<div class="decl" id="Lean.MonadCache"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L10-L12">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCache">ink</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">Lean.MonadCache</a></span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><ul class="structure_fields" id="Lean.MonadCache.mk"><li id="Lean.MonadCache.findCached?" class="structure_field"><div class="structure_field_info">findCached? : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="../.././Init/Prelude.html#Option">Option</a> <span class="fn">β</span></span>)</span></span></div></li><li id="Lean.MonadCache.cache" class="structure_field"><div class="structure_field_info">cache : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> <a href="../.././Init/Prelude.html#Unit">Unit</a></span></span></span></div></li></ul><p>Interface for caching results.</p><details class="instances"><summary>Instances</summary><ul id="instances-list-Lean.MonadCache" class="instances-list"></ul></details></div></div><div class="decl" id="Lean.checkCache"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L16-L22">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.checkCache">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.checkCache">Lean.checkCache</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">Lean.MonadCache</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Init/Prelude.html#Unit">Unit</a> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div><p>If entry <code>a := b</code> is already in the cache, then return <code>b</code>.
+Otherwise, execute <code>b ← f ()</code>, store <code>a := b</code> in the cache and return <code>b</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.checkCache">Lean.checkCache</a> <span class="fn">a</span> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache.findCached?">Lean.MonadCache.findCached?</a> <span class="fn">a</span></span>
+  <span class="fn">match <span class="fn">a</span> with
+    | <span class="fn"><a href="../.././Init/Prelude.html#Option.some">some</a> <span class="fn">b</span></span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></span>
+    | <span class="fn">none</span> =&gt <span class="fn">do
+      let <span class="fn">b</span> ← <span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Unit.unit">()</a></span>
+      <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache.cache">Lean.MonadCache.cache</a> <span class="fn">a</span> <span class="fn">b</span></span>
+      <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></span></span></span></span></span></li></ul></details></div></div><div class="decl" id="Lean.instMonadCacheReaderT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L24-L26">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.instMonadCacheReaderT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.instMonadCacheReaderT">Lean.instMonadCacheReaderT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">Lean.MonadCache</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">Lean.MonadCache</a> <span class="fn">α</span> <span class="fn">β</span> (<span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.instMonadCacheReaderT</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">findCached?</span> := <span class="fn">fun <span class="fn">a</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache.findCached?">Lean.MonadCache.findCached?</a> <span class="fn">a</span></span></span>, <span class="fn">cache</span> := <span class="fn">fun <span class="fn">a</span> <span class="fn">b</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache.cache">Lean.MonadCache.cache</a> <span class="fn">a</span> <span class="fn">b</span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Lean.instMonadCacheExceptT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L28-L30">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.instMonadCacheExceptT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.instMonadCacheExceptT">Lean.instMonadCacheExceptT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">Lean.MonadCache</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">Lean.MonadCache</a> <span class="fn">α</span> <span class="fn">β</span> (<span class="fn"><a href="../.././Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.instMonadCacheExceptT</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">findCached?</span> := <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><a href="../.././Init/Control/Except.html#ExceptT.lift">ExceptT.lift</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache.findCached?">Lean.MonadCache.findCached?</a> <span class="fn">a</span></span>)</span></span>,
+    <span class="fn">cache</span> := <span class="fn">fun <span class="fn">a</span> <span class="fn">b</span> =&gt <span class="fn"><a href="../.././Init/Control/Except.html#ExceptT.lift">ExceptT.lift</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache.cache">Lean.MonadCache.cache</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadHashMapCacheAdapter"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L36-L38">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter">ink</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter">Lean.MonadHashMapCacheAdapter</a></span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><ul class="structure_fields" id="Lean.MonadHashMapCacheAdapter.mk"><li id="Lean.MonadHashMapCacheAdapter.getCache" class="structure_field"><div class="structure_field_info">getCache : <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>)</span></div></li><li id="Lean.MonadHashMapCacheAdapter.modifyCache" class="structure_field"><div class="structure_field_info">modifyCache : <span class="fn">(<span class="fn"><span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span> → <span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span></span>) → <span class="fn"><span class="fn">m</span> <a href="../.././Init/Prelude.html#Unit">Unit</a></span></span></div></li></ul><p>Adapter for implementing <code><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">MonadCache</a></code> interface using <code>HashMap</code>s.
+We just have to specify how to extract/modify the <code>HashMap</code>.</p><details class="instances"><summary>Instances</summary><ul id="instances-list-Lean.MonadHashMapCacheAdapter" class="instances-list"></ul></details></div></div><div class="decl" id="Lean.MonadHashMapCacheAdapter.findCached?"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L42-L44">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.findCached?">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.findCached?">Lean.MonadHashMapCacheAdapter.findCached?</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter">Lean.MonadHashMapCacheAdapter</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> (<span class="fn"><a href="../.././Init/Prelude.html#Option">Option</a> <span class="fn">β</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.findCached?">Lean.MonadHashMapCacheAdapter.findCached?</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let c ← <span class="fn">Lean.MonadHashMapCacheAdapter.getCache</span>
+  <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap.find?">Std.HashMap.find?</a> <span class="fn">c</span> <span class="fn">a</span></span>)</span></span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadHashMapCacheAdapter.cache"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L46-L47">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.cache">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.cache">Lean.MonadHashMapCacheAdapter.cache</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter">Lean.MonadHashMapCacheAdapter</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <a href="../.././Init/Prelude.html#Unit">Unit</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.cache">Lean.MonadHashMapCacheAdapter.cache</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.modifyCache">Lean.MonadHashMapCacheAdapter.modifyCache</a> <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap.insert">Std.HashMap.insert</a> <span class="fn">s</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadHashMapCacheAdapter.instMonadCache"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L49-L51">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.instMonadCache">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter.instMonadCache">Lean.MonadHashMapCacheAdapter.instMonadCache</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter">Lean.MonadHashMapCacheAdapter</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCache">Lean.MonadCache</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadHashMapCacheAdapter.instMonadCache</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">findCached?</span> := <span class="fn">Lean.MonadHashMapCacheAdapter.findCached?</span>, <span class="fn">cache</span> := <span class="fn">Lean.MonadHashMapCacheAdapter.cache</span> }</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L55-L55">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Type</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instMonadHashMapCacheAdapterMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L61-L63">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadHashMapCacheAdapterMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadHashMapCacheAdapterMonadCacheT">Lean.MonadCacheT.instMonadHashMapCacheAdapterMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#MonadLiftT">MonadLiftT</a> (<span class="fn"><a href="../.././Init/System/ST.html#ST">ST</a> <span class="fn">ω</span></span>) <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter">Lean.MonadHashMapCacheAdapter</a> <span class="fn">α</span> <span class="fn">β</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadCacheT.instMonadHashMapCacheAdapterMonadCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">getCache</span> := <span class="fn">get</span>, <span class="fn">modifyCache</span> := <span class="fn">fun <span class="fn">f</span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#modify">modify</a> <span class="fn">f</span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.run"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L65-L66">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.run">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.run">Lean.MonadCacheT.run</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#MonadLiftT">MonadLiftT</a> (<span class="fn"><a href="../.././Init/System/ST.html#ST">ST</a> <span class="fn">ω</span></span>) <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span> <span class="fn">σ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">σ</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.run">Lean.MonadCacheT.run</a> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'.run'">StateRefT'.run'</a> <span class="fn">x</span> <span class="fn">Std.mkHashMap</span></span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instMonadMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L68-L68">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadMonadCacheT">Lean.MonadCacheT.instMonadMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadCacheT.instMonadMonadCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instMonadLiftMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L69-L69">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadLiftMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadLiftMonadCacheT">Lean.MonadCacheT.instMonadLiftMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#MonadLift">MonadLift</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadCacheT.instMonadLiftMonadCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#MonadLift">MonadLift</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instMonadExceptOfMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L70-L70">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadExceptOfMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadExceptOfMonadCacheT">Lean.MonadCacheT.instMonadExceptOfMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">Type u_1</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#MonadExceptOf">MonadExceptOf</a> <span class="fn">ε</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#MonadExceptOf">MonadExceptOf</a> <span class="fn">ε</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadExceptOfMonadCacheT">Lean.MonadCacheT.instMonadExceptOfMonadCacheT</a> <span class="fn">ε</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#MonadExceptOf">MonadExceptOf</a> <span class="fn">ε</span> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instMonadControlMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L71-L71">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadControlMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadControlMonadCacheT">Lean.MonadCacheT.instMonadControlMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Control/Basic.html#MonadControl">MonadControl</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadCacheT.instMonadControlMonadCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Control/Basic.html#MonadControl">MonadControl</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instMonadFinallyMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L72-L72">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadFinallyMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadFinallyMonadCacheT">Lean.MonadCacheT.instMonadFinallyMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadCacheT.instMonadFinallyMonadCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instMonadRefMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L73-L73">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadRefMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instMonadRefMonadCacheT">Lean.MonadCacheT.instMonadRefMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Lean.MonadRef">Lean.MonadRef</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Lean.MonadRef">Lean.MonadRef</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadCacheT.instMonadRefMonadCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#Lean.MonadRef">Lean.MonadRef</a> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadCacheT.instAlternativeMonadCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L74-L74">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadCacheT.instAlternativeMonadCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT.instAlternativeMonadCacheT">Lean.MonadCacheT.instAlternativeMonadCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/System/ST.html#STWorld">STWorld</a> <span class="fn">ω</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Control/Basic.html#Alternative">Alternative</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadCacheT">Lean.MonadCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadCacheT.instAlternativeMonadCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Control/Basic.html#Alternative">Alternative</a> (<span class="fn"><a href="../.././Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L79-L79">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a></span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">Type</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Type</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/State.html#StateT">StateT</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.instMonadHashMapCacheAdapterMonadStateCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L85-L87">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadHashMapCacheAdapterMonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadHashMapCacheAdapterMonadStateCacheT">Lean.MonadStateCacheT.instMonadHashMapCacheAdapterMonadStateCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadHashMapCacheAdapter">Lean.MonadHashMapCacheAdapter</a> <span class="fn">α</span> <span class="fn">β</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadStateCacheT.instMonadHashMapCacheAdapterMonadStateCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">getCache</span> := <span class="fn">get</span>, <span class="fn">modifyCache</span> := <span class="fn">fun <span class="fn">f</span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#modify">modify</a> <span class="fn">f</span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.run"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L89-L90">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.run">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.run">Lean.MonadStateCacheT.run</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span> <span class="fn">σ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">σ</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.run">Lean.MonadStateCacheT.run</a> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/State.html#StateT.run'">StateT.run'</a> <span class="fn">x</span> <span class="fn">Std.mkHashMap</span></span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.instMonadMonadStateCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L92-L92">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadMonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadMonadStateCacheT">Lean.MonadStateCacheT.instMonadMonadStateCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadStateCacheT.instMonadMonadStateCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> (<span class="fn"><a href="../.././Init/Control/State.html#StateT">StateT</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.instMonadLiftMonadStateCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L93-L93">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadLiftMonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadLiftMonadStateCacheT">Lean.MonadStateCacheT.instMonadLiftMonadStateCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#MonadLift">MonadLift</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadStateCacheT.instMonadLiftMonadStateCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#MonadLift">MonadLift</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Init/Control/State.html#StateT">StateT</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L94-L94">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT">Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">Type u_1</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#MonadExceptOf">MonadExceptOf</a> <span class="fn">ε</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#MonadExceptOf">MonadExceptOf</a> <span class="fn">ε</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT">Lean.MonadStateCacheT.instMonadExceptOfMonadStateCacheT</a> <span class="fn">ε</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#MonadExceptOf">MonadExceptOf</a> <span class="fn">ε</span> (<span class="fn"><a href="../.././Init/Control/State.html#StateT">StateT</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.instMonadControlMonadStateCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L95-L95">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadControlMonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadControlMonadStateCacheT">Lean.MonadStateCacheT.instMonadControlMonadStateCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Control/Basic.html#MonadControl">MonadControl</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadStateCacheT.instMonadControlMonadStateCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Control/Basic.html#MonadControl">MonadControl</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Init/Control/State.html#StateT">StateT</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.instMonadFinallyMonadStateCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L96-L96">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadFinallyMonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadFinallyMonadStateCacheT">Lean.MonadStateCacheT.instMonadFinallyMonadStateCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadStateCacheT.instMonadFinallyMonadStateCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> (<span class="fn"><a href="../.././Init/Control/State.html#StateT">StateT</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="Lean.MonadStateCacheT.instMonadRefMonadStateCacheT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/MonadCache.lean#L97-L97">source</a></div><div class="ink_link"><a href="../.././src/Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadRefMonadStateCacheT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT.instMonadRefMonadStateCacheT">Lean.MonadStateCacheT.instMonadRefMonadStateCacheT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Lean.MonadRef">Lean.MonadRef</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Lean.MonadRef">Lean.MonadRef</a> (<span class="fn"><a href="../.././Lean/Util/MonadCache.html#Lean.MonadStateCacheT">Lean.MonadStateCacheT</a> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lean.MonadStateCacheT.instMonadRefMonadStateCacheT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../.././Init/Prelude.html#Lean.MonadRef">Lean.MonadRef</a> (<span class="fn"><a href="../.././Init/Control/State.html#StateT">StateT</a> (<span class="fn"><a href="../.././Std/Data/HashMap.html#Std.HashMap">Std.HashMap</a> <span class="fn">α</span> <span class="fn">β</span></span>) <span class="fn">m</span></span>)</span>)</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

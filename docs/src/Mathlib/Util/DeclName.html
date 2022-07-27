@@ -1,0 +1,29 @@
+<html lang="en" class="alectryon-standalone"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././src/alectryon.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="stylesheet" href="../../.././src/docutils_basic.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><script defer="true" src="../../.././src/alectryon.js"></script></head><body><article class="alectryon-root alectryon-centered"><div class="alectryon-banner">Built with <a href="https://github.com/leanprover/doc-gen4">doc-gen4</a>, running Lean4.
+      Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents.
+      Use <kbd>Ctrl+↑</kbd><kbd>Ctrl+↓</kbd>to navigate, <kbd>Ctrl+🖱️</kbd>to focus.
+      On Mac, use <kbd>Cmd</kbd>instead of <kbd>Ctrl</kbd>.
+    </div><pre class="alectryon-io highlight"><span class="alectryon-wsp"><span class="alectryon-token">/-
+Copyright (c) 2021 Mario Carneiro. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Mario Carneiro
+-/
+import Lean
+
+/-!
+Defines a macro that returns the name of the enclosing definition.
+
+```
+namespace Foo
+def bar : Name := decl_name!
+
+#eval Foo.bar -- `Foo.bar
+```
+-/
+
+</span><span class="alectryon-token"><span class="k">open</span></span><span class="alectryon-token"> Lean Elab Term
+
+</span><span class="alectryon-token"><span class="k">elab</span></span><span class="alectryon-token"> "decl_name%" : term => </span><span class="alectryon-token"><span class="k">do</span></span><span class="alectryon-token">
+  </span><span class="alectryon-token"><span class="k">let</span></span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>some</var><b>: </b><span>{α : Type ?u.87} → α → Option α</span></span></div></blockquote></div></small></div>some</span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>declName</var><b>: </b><span>Name</span></span></div></blockquote></div></small></div><span class="nv">declName</span></span><span class="alectryon-token"> ← </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>getDeclName?</var><b>: </b><span>TermElabM (Option Name)</span></span></div></blockquote></div></small></div>getDeclName?</span><span class="alectryon-token">
+    | </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>throwError "invalid `decl_name!` macro, it must be used in definitions"</var><b>: </b><span>TermElabM Expr</span></span></div></blockquote></div></small></div><span class="k">throwError</span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>throwError "invalid `decl_name!` macro, it must be used in definitions"</var><b>: </b><span>TermElabM Expr</span></span></div></blockquote></div></small></div> "invalid `decl_name!` macro, it must be used in definitions"</span><span class="alectryon-token">
+  </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>elabTerm</var><b>: </b><span>Syntax → Option Expr → optParam Bool true → optParam Bool true → TermElabM Expr</span></span></div></blockquote></div></small></div>elabTerm</span><span class="alectryon-token"> (</span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>quote</var><b>: </b><span>{α : Type} → {k : optParam SyntaxNodeKind `term} → [self : Quote α k] → α → TSyntax k</span></span></div></blockquote></div></small></div>quote</span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>declName</var><b>: </b><span>Name</span></span></div></blockquote></div></small></div><span class="nv">declName</span></span><span class="alectryon-token"> : </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>Term</var><b>: </b><span>Type</span></span></div></blockquote></div></small></div>Term</span><span class="alectryon-token">) </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>none</var><b>: </b><span>{α : Type} → Option α</span></span></div></blockquote></div></small></div>none</span><span class="alectryon-token">
+</span></span></pre></article></body></html>

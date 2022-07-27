@@ -1,0 +1,1 @@
+{"name":"Lean.Util.RecDepth","instances":[],"imports":["Init","Lean.Data.Options"],"declarations":[{"sourceLink":"https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Util/RecDepth.lean#L10-L10","name":"Lean.maxRecDepth","docLink":"./Lean/Util/RecDepth.html#Lean.maxRecDepth","doc":""}]}

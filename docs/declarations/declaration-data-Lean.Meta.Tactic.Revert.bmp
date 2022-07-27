@@ -1,0 +1,1 @@
+{"name":"Lean.Meta.Tactic.Revert","instances":[],"imports":["Init","Lean.Meta.Tactic.Clear"],"declarations":[{"sourceLink":"https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Meta/Tactic/Revert.lean#L10-L41","name":"Lean.Meta.revert","docLink":"./Lean/Meta/Tactic/Revert.html#Lean.Meta.revert","doc":""}]}

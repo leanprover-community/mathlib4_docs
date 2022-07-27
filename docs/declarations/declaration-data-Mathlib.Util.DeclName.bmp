@@ -1,0 +1,1 @@
+{"name":"Mathlib.Util.DeclName","instances":[],"imports":["Init","Lean"],"declarations":[{"sourceLink":"https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Util/DeclName.lean#L21-L21","name":"«termDecl_name%»","docLink":"./Mathlib/Util/DeclName.html#«termDecl_name%»","doc":""}]}

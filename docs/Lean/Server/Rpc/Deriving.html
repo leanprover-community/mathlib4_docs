@@ -1,0 +1,80 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Lean.Server.Rpc.Deriving</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Lean.Server.Rpc.Deriving";</script><script type="module" src="../../.././nav.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Lean.Server.Rpc.Deriving</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Lean.Server.Rpc.Deriving</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Server/Rpc/Deriving.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Lean/PrettyPrinter.html">Lean.PrettyPrinter</a></li><li><a href="../../.././Lean/Elab/Command.html">Lean.Elab.Command</a></li><li><a href="../../.././Lean/Elab/Term.html">Lean.Elab.Term</a></li><li><a href="../../.././Lean/Elab/Deriving/Basic.html">Lean.Elab.Deriving.Basic</a></li><li><a href="../../.././Lean/Elab/Deriving/Util.html">Lean.Elab.Deriving.Util</a></li><li><a href="../../.././Lean/Server/Rpc/Basic.html">Lean.Server.Rpc.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Lean.Server.Rpc.Deriving" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Lean.Server.RpcEncoding.foldWithConstructors">Lean.Server.RpcEncoding.foldWithConstructors</a></div><div class="nav_link"><a class="break_within" href="#Lean.Server.RpcEncoding.withFieldsAux">Lean.Server.RpcEncoding.withFieldsAux</a></div><div class="nav_link"><a class="break_within" href="#Lean.Server.RpcEncoding.withFields">Lean.Server.RpcEncoding.withFields</a></div><div class="nav_link"><a class="break_within" href="#Lean.Server.RpcEncoding.withFieldsFlattened">Lean.Server.RpcEncoding.withFieldsFlattened</a></div></nav><main>
+<div class="decl" id="Lean.Server.RpcEncoding.foldWithConstructors"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Server/Rpc/Deriving.lean#L43-L52">source</a></div><div class="ink_link"><a href="../../.././src/Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.foldWithConstructors">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.foldWithConstructors">Lean.Server.RpcEncoding.foldWithConstructors</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Control/Basic.html#MonadControlT">MonadControlT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#MonadLiftT">MonadLiftT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(indVal : <a href="../../.././Lean/Declaration.html#Lean.InductiveVal">Lean.InductiveVal</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(params : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> → <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span> → <span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></div></div><p>Fold over the constructors of <code>indVal</code> using <code>k</code>. Every iteration is executed in an updated
+local context containing free variables for the arguments of the constructor. <code>k</code> is given the
+ctor name, arguments, and output type. <code>params</code> is expected to contain free or meta variables
+for the parameters of <code>indVal</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Lean.Server.RpcEncoding.withFieldsAux"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Server/Rpc/Deriving.lean#L54-L62">source</a></div><div class="ink_link"><a href="../../.././src/Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.withFieldsAux">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.withFieldsAux">Lean.Server.RpcEncoding.withFieldsAux</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Control/Basic.html#MonadControlT">MonadControlT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#MonadLiftT">MonadLiftT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(indVal : <a href="../../.././Lean/Declaration.html#Lean.InductiveVal">Lean.InductiveVal</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(params : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span> → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(fieldNames : <span class="fn"><a href="../../.././Init/Prelude.html#Unit">Unit</a> → <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Lean.Server.RpcEncoding.withFields"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Server/Rpc/Deriving.lean#L64-L67">source</a></div><div class="ink_link"><a href="../../.././src/Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.withFields">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.withFields">Lean.Server.RpcEncoding.withFields</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Control/Basic.html#MonadControlT">MonadControlT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#MonadLiftT">MonadLiftT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(indVal : <a href="../../.././Lean/Declaration.html#Lean.InductiveVal">Lean.InductiveVal</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(params : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span> → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Lean.Server.RpcEncoding.withFieldsFlattened"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Lean/Server/Rpc/Deriving.lean#L69-L72">source</a></div><div class="ink_link"><a href="../../.././src/Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.withFieldsFlattened">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Lean/Server/Rpc/Deriving.html#Lean.Server.RpcEncoding.withFieldsFlattened">Lean.Server.RpcEncoding.withFieldsFlattened</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Control/Basic.html#MonadControlT">MonadControlT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#MonadLiftT">MonadLiftT</a> <a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(indVal : <a href="../../.././Lean/Declaration.html#Lean.InductiveVal">Lean.InductiveVal</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(params : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span> → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(includeSubobjectFields : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

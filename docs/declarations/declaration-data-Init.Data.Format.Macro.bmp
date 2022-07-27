@@ -1,0 +1,1 @@
+{"name":"Init.Data.Format.Macro","instances":[],"imports":["Init.Data.Format.Basic","Init.Data.ToString.Macro"],"declarations":[{"sourceLink":"https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Data/Format/Macro.lean#L12-L12","name":"Std.termF!_","docLink":"./Init/Data/Format/Macro.html#Std.termF!_","doc":""}]}

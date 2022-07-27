@@ -1,0 +1,1 @@
+{"name":"Mathlib.Init.Data.Option.Basic","instances":[],"imports":["Init"],"declarations":[{"sourceLink":"https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Init/Data/Option/Basic.lean#L9-L10","name":"Option.get","docLink":"./Mathlib/Init/Data/Option/Basic.html#Option.get","doc":""}]}

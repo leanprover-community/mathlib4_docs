@@ -1,0 +1,1 @@
+{"name":"Mathlib.Tactic.NormCast","instances":[],"imports":["Init","Mathlib.Tactic.NormCast.Lemmas","Mathlib.Tactic.NormCast.Tactic"],"declarations":[]}

@@ -1,0 +1,325 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Init.Control.StateCps</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Init.Control.StateCps";</script><script type="module" src="../.././nav.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Init.Control.StateCps</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Init.Control.StateCps</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init/Control/Lawful.html">Init.Control.Lawful</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Init.Control.StateCps" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#StateCpsT">StateCpsT</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK">StateCpsT.runK</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.run">StateCpsT.run</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.run'">StateCpsT.run'</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.instMonadStateCpsT">StateCpsT.instMonadStateCpsT</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT">StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.instMonadStateOfStateCpsT">StateCpsT.instMonadStateOfStateCpsT</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.lift">StateCpsT.lift</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.instMonadLiftStateCpsT">StateCpsT.instMonadLiftStateCpsT</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_pure">StateCpsT.runK_pure</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_get">StateCpsT.runK_get</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_set">StateCpsT.runK_set</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_modify">StateCpsT.runK_modify</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_lift">StateCpsT.runK_lift</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_monadLift">StateCpsT.runK_monadLift</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_bind_pure">StateCpsT.runK_bind_pure</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_bind_lift">StateCpsT.runK_bind_lift</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_bind_get">StateCpsT.runK_bind_get</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_bind_set">StateCpsT.runK_bind_set</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.runK_bind_modify">StateCpsT.runK_bind_modify</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.run_eq">StateCpsT.run_eq</a></div><div class="nav_link"><a class="break_within" href="#StateCpsT.run'_eq">StateCpsT.run'_eq</a></div></nav><main>
+<div class="mod_doc"><p>The State monad transformer using CPS style.</p></div><div class="decl" id="StateCpsT"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L13-L13">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a></span><span class="decl_args">
+<span class="fn">(σ : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">Type (max (u + 1) v)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> (<span class="fn">(<span class="fn">δ</span> : <span class="fn">Type u</span>) → <span class="fn"><span class="fn">σ</span> → <span class="fn">(<span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">δ</span></span></span></span>) → <span class="fn"><span class="fn">m</span> <span class="fn">δ</span></span></span></span></span>)</span></li></ul></details></div></div><div class="decl" id="StateCpsT.runK"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L17-L18">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> <span class="fn">x</span> <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <span class="fn">β</span> <span class="fn">s</span> <span class="fn">k</span></span></span></li></ul></details></div></div><div class="decl" id="StateCpsT.run"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L20-L21">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.run">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.run">StateCpsT.run</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> (<span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">σ</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.run">StateCpsT.run</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> <span class="fn">x</span> <span class="fn">s</span> <span class="fn">fun <span class="fn">a</span> <span class="fn">s</span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">a</span>, <span class="fn">s</span>)</span></span></span></span></span></li></ul></details></div></div><div class="decl" id="StateCpsT.run'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L23-L24">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.run'">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.run'">StateCpsT.run'</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.run'">StateCpsT.run'</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> <span class="fn">x</span> <span class="fn">s</span> <span class="fn">fun <span class="fn">a</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span></span></span></span></li></ul></details></div></div><div class="decl" id="StateCpsT.instMonadStateCpsT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L26-L29">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.instMonadStateCpsT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.instMonadStateCpsT">StateCpsT.instMonadStateCpsT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> (<span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">StateCpsT.instMonadStateCpsT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">Monad.mk</span></span></li></ul></details></div></div><div class="decl" id="StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L31-L32">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT">StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> (<span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT">@<a href="../.././Init/Control/StateCps.html#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT">StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT</a></a> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Init/Control/StateCps.html#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT.proof_1">@<a href="../.././Init/Control/StateCps.html#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT.proof_1">StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="StateCpsT.instMonadStateOfStateCpsT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L34-L37">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.instMonadStateOfStateCpsT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.instMonadStateOfStateCpsT">StateCpsT.instMonadStateOfStateCpsT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#MonadStateOf">MonadStateOf</a> <span class="fn">σ</span> (<span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">StateCpsT.instMonadStateOfStateCpsT</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">get</span> := <span class="fn">fun <span class="fn">x</span> <span class="fn">s</span> <span class="fn">k</span> =&gt <span class="fn"><span class="fn">k</span> <span class="fn">s</span> <span class="fn">s</span></span></span>, <span class="fn">set</span> := <span class="fn">fun <span class="fn">s</span> <span class="fn">x</span> <span class="fn">x_1</span> <span class="fn">k</span> =&gt <span class="fn"><span class="fn">k</span> <a href="../.././Init/Prelude.html#PUnit.unit">PUnit.unit</a> <span class="fn">s</span></span></span>,
+    <span class="fn">modifyGet</span> := <span class="fn">fun {<span class="fn">α</span>} <span class="fn">f</span> <span class="fn">x</span> <span class="fn">s</span> <span class="fn">k</span> =&gt
+      <span class="fn">match <span class="fn"><span class="fn">f</span> <span class="fn">s</span></span> with
+      | <span class="fn">(<span class="fn">a</span>, <span class="fn">s</span>)</span> =&gt <span class="fn"><span class="fn">k</span> <span class="fn">a</span> <span class="fn">s</span></span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="StateCpsT.lift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L39-L40">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.lift">ink</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.lift">StateCpsT.lift</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.lift">StateCpsT.lift</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  <span class="fn"><span class="fn">k</span> <span class="fn">a</span> <span class="fn">s</span></span></span></span></li></ul></details></div></div><div class="decl" id="StateCpsT.instMonadLiftStateCpsT"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L42-L43">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.instMonadLiftStateCpsT">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.instMonadLiftStateCpsT">StateCpsT.instMonadLiftStateCpsT</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#MonadLift">MonadLift</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">StateCpsT.instMonadLiftStateCpsT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">monadLift</span> := <span class="fn">fun {<span class="fn">α</span>} =&gt <span class="fn">StateCpsT.lift</span></span> }</span></span></li></ul></details></div></div><div class="decl" id="StateCpsT.runK_pure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L45-L45">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_pure">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_pure">StateCpsT.runK_pure</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <span class="fn">a</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_get"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L47-L47">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_get">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_get">StateCpsT.runK_get</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">σ</span> → <span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> <span class="fn">get</span> <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <span class="fn">s</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L49-L49">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_set">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_set">StateCpsT.runK_set</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s' : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><a href="../.././Init/Prelude.html#PUnit">PUnit</a> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><a href="../.././Init/Prelude.html#MonadStateOf.set">set</a> <span class="fn">s'</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <a href="../.././Init/Prelude.html#PUnit.unit">PUnit.unit</a> <span class="fn">s'</span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_modify"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L51-L51">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_modify">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_modify">StateCpsT.runK_modify</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">σ</span> → <span class="fn">σ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><a href="../.././Init/Prelude.html#PUnit">PUnit</a> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><a href="../.././Init/Prelude.html#modify">modify</a> <span class="fn">f</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <a href="../.././Init/Prelude.html#PUnit.unit">PUnit.unit</a> (<span class="fn"><span class="fn">f</span> <span class="fn">s</span></span>)</span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_lift"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L53-L53">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_lift">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_lift">StateCpsT.runK_lift</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.lift">StateCpsT.lift</a> <span class="fn">x</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  <span class="fn"><span class="fn">k</span> <span class="fn">a</span> <span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_monadLift"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L55-L56">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_monadLift">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_monadLift">StateCpsT.runK_monadLift</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#MonadLiftT">MonadLiftT</a> <span class="fn">n</span> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><a href="../.././Init/Prelude.html#MonadLiftT.monadLift">monadLift</a> <span class="fn">x</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><a href="../.././Init/Prelude.html#MonadLiftT.monadLift">monadLift</a> <span class="fn">x</span></span>
+  <span class="fn"><span class="fn">k</span> <span class="fn">a</span> <span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_bind_pure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L58-L58">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_bind_pure">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_bind_pure">StateCpsT.runK_bind_pure</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">γ</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) <span class="fn">s</span> <span class="fn">k</span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_bind_lift"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L60-L61">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_bind_lift">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_bind_lift">StateCpsT.runK_bind_lift</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">γ</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.lift">StateCpsT.lift</a> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) <span class="fn">s</span> <span class="fn">k</span></span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_bind_get"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L63-L63">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_bind_get">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_bind_get">StateCpsT.runK_bind_get</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">σ</span> → <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">γ</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn">get</span> <a href="../.././Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn">f</span> <span class="fn">s</span></span>) <span class="fn">s</span> <span class="fn">k</span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_bind_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L65-L65">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_bind_set">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_bind_set">StateCpsT.runK_bind_set</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Init/Prelude.html#PUnit">PUnit</a> → <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s' : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">γ</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#MonadStateOf.set">set</a> <span class="fn">s'</span></span> <a href="../.././Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#PUnit.unit">PUnit.unit</a></span>) <span class="fn">s'</span> <span class="fn">k</span></span></span></div></div></div></div><div class="decl" id="StateCpsT.runK_bind_modify"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L67-L67">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.runK_bind_modify">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.runK_bind_modify">StateCpsT.runK_bind_modify</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">σ</span> → <span class="fn">σ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><a href="../.././Init/Prelude.html#PUnit">PUnit</a> → <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">m</span> <span class="fn">γ</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#modify">modify</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">g</span></span>) <span class="fn">s</span> <span class="fn">k</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> (<span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#PUnit.unit">PUnit.unit</a></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">s</span></span>) <span class="fn">k</span></span></span></div></div></div></div><div class="decl" id="StateCpsT.run_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L69-L69">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.run_eq">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.run_eq">StateCpsT.run_eq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type (max u_1 u_2)</span> → <span class="fn">Type u_3</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type (max u_1 u_2)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type (max u_1 u_2)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.run">StateCpsT.run</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> <span class="fn">x</span> <span class="fn">s</span> <span class="fn">fun <span class="fn">a</span> <span class="fn">s</span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">a</span>, <span class="fn">s</span>)</span></span></span></span></span></div></div></div></div><div class="decl" id="StateCpsT.run'_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/6a767a66a13c588cce3829bf1de00a1830883843/src/Init/Control/StateCps.lean#L71-L71">source</a></div><div class="ink_link"><a href="../.././src/Init/Control/StateCps.html#StateCpsT.run'_eq">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Init/Control/StateCps.html#StateCpsT.run'_eq">StateCpsT.run'_eq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT">StateCpsT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.run'">StateCpsT.run'</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/StateCps.html#StateCpsT.runK">StateCpsT.runK</a> <span class="fn">x</span> <span class="fn">s</span> <span class="fn">fun <span class="fn">a</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

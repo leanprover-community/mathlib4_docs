@@ -1,0 +1,438 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.Prod</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Data.Prod";</script><script type="module" src="../.././nav.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within">Mathlib.Data.Prod</p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top">Mathlib.Data.Prod</a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Init/Function.html">Mathlib.Init.Function</a></li><li><a href="../.././Mathlib/Logic/Basic.html">Mathlib.Logic.Basic</a></li><li><a href="../.././Mathlib/Tactic/Basic.html">Mathlib.Tactic.Basic</a></li><li><a href="../.././Mathlib/Tactic/Ext.html">Mathlib.Tactic.Ext</a></li><li><a href="../.././Mathlib/Logic/Function/Basic.html">Mathlib.Logic.Function.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.Prod" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#prod_map">prod_map</a></div><div class="nav_link"><a class="break_within" href="#Prod.forall">Prod.forall</a></div><div class="nav_link"><a class="break_within" href="#Prod.exists">Prod.exists</a></div><div class="nav_link"><a class="break_within" href="#Prod.forall'">Prod.forall'</a></div><div class="nav_link"><a class="break_within" href="#Prod.exists'">Prod.exists'</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_mk">Prod.map_mk</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_fst">Prod.map_fst</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_snd">Prod.map_snd</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_fst'">Prod.map_fst'</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_snd'">Prod.map_snd'</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_comp_map">Prod.map_comp_map</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_map">Prod.map_map</a></div><div class="nav_link"><a class="break_within" href="#Prod.mk.inj_iff">Prod.mk.inj_iff</a></div><div class="nav_link"><a class="break_within" href="#Prod.mk.inj_left">Prod.mk.inj_left</a></div><div class="nav_link"><a class="break_within" href="#Prod.mk.inj_right">Prod.mk.inj_right</a></div><div class="nav_link"><a class="break_within" href="#Prod.mk.eta">Prod.mk.eta</a></div><div class="nav_link"><a class="break_within" href="#Prod.ext_iff">Prod.ext_iff</a></div><div class="nav_link"><a class="break_within" href="#Prod.ext'">Prod.ext'</a></div><div class="nav_link"><a class="break_within" href="#Prod.map_def">Prod.map_def</a></div><div class="nav_link"><a class="break_within" href="#Prod.id_prod">Prod.id_prod</a></div><div class="nav_link"><a class="break_within" href="#Prod.fst_surjective">Prod.fst_surjective</a></div><div class="nav_link"><a class="break_within" href="#Prod.snd_surjective">Prod.snd_surjective</a></div><div class="nav_link"><a class="break_within" href="#Prod.fst_injective">Prod.fst_injective</a></div><div class="nav_link"><a class="break_within" href="#Prod.snd_injective">Prod.snd_injective</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap">Prod.swap</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_swap">Prod.swap_swap</a></div><div class="nav_link"><a class="break_within" href="#Prod.fst_swap">Prod.fst_swap</a></div><div class="nav_link"><a class="break_within" href="#Prod.snd_swap">Prod.snd_swap</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_prod_mk">Prod.swap_prod_mk</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_swap_eq">Prod.swap_swap_eq</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_LeftInverse">Prod.swap_LeftInverse</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_RightInverse">Prod.swap_RightInverse</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_injective">Prod.swap_injective</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_surjective">Prod.swap_surjective</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_bijective">Prod.swap_bijective</a></div><div class="nav_link"><a class="break_within" href="#Prod.swap_inj">Prod.swap_inj</a></div><div class="nav_link"><a class="break_within" href="#Prod.eq_iff_fst_eq_snd_eq">Prod.eq_iff_fst_eq_snd_eq</a></div><div class="nav_link"><a class="break_within" href="#Prod.fst_eq_iff">Prod.fst_eq_iff</a></div><div class="nav_link"><a class="break_within" href="#Prod.snd_eq_iff">Prod.snd_eq_iff</a></div><div class="nav_link"><a class="break_within" href="#Prod.lex_def">Prod.lex_def</a></div><div class="nav_link"><a class="break_within" href="#Prod.Lex.decidable">Prod.Lex.decidable</a></div><div class="nav_link"><a class="break_within" href="#Function.injective.prod_map">Function.injective.prod_map</a></div><div class="nav_link"><a class="break_within" href="#Function.surjective.prod_map">Function.surjective.prod_map</a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Extra-facts-about-Prod">Extra facts about <code><a href="../.././Init/Prelude.html#Prod">Prod</a></code> <a class="hover-link" href="#Extra-facts-about-Prod">#</a></h1><p>This file defines <code><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> : α × β → β × α</code> and proves various simple lemmas about <code><a href="../.././Init/Prelude.html#Prod">Prod</a></code>.</p></div><div class="decl" id="prod_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L20-L21">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#prod_map">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#prod_map">prod_map</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">p</span>.fst</span></span>, <span class="fn"><span class="fn">g</span> <span class="fn"><span class="fn">p</span>.snd</span></span>)</span></span></div></div></div></div><div class="decl" id="Prod.forall"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L25-L26">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.forall">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.forall">Prod.forall</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn">x</span> : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>) → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span>) <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn">(<span class="fn">b</span> : <span class="fn">β</span>) → <span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">a</span>, <span class="fn">b</span>)</span></span></span></span></span></div></div></div></div><div class="decl" id="Prod.exists"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L28-L29">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.exists">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.exists">Prod.exists</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> → <span class="fn">Prop</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∃ <span class="fn">x</span>, <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span>) <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">a </span><span class="fn">b</span>, <span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">a</span>, <span class="fn">b</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Prod.forall'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L31-L32">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.forall'">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.forall'">Prod.forall'</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn">x</span> : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>) → <span class="fn"><span class="fn">p</span> <span class="fn"><span class="fn">x</span>.fst</span> <span class="fn"><span class="fn">x</span>.snd</span></span></span>) <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">(<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn">(<span class="fn">b</span> : <span class="fn">β</span>) → <span class="fn"><span class="fn">p</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="Prod.exists'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L34-L35">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.exists'">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.exists'">Prod.exists'</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">Prop</span></span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∃ <span class="fn">x</span>, <span class="fn"><span class="fn">p</span> <span class="fn"><span class="fn">x</span>.fst</span> <span class="fn"><span class="fn">x</span>.snd</span></span></span>) <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">a </span><span class="fn">b</span>, <span class="fn"><span class="fn">p</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Prod.map_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L37-L37">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_mk">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_mk">Prod.map_mk</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">(<span class="fn">a</span>, <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>, <span class="fn"><span class="fn">g</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="Prod.map_fst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L39-L39">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_fst">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_fst">Prod.map_fst</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">p</span></span>).fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">p</span>.fst</span></span></span></div></div></div></div><div class="decl" id="Prod.map_snd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L41-L41">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_snd">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_snd">Prod.map_snd</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">p</span></span>).snd</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn"><span class="fn">p</span>.snd</span></span></span></div></div></div></div><div class="decl" id="Prod.map_fst'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L43-L44">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_fst'">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_fst'">Prod.map_fst'</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Prod.fst</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Prod.fst</span></span></span></div></div></div></div><div class="decl" id="Prod.map_snd'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L46-L47">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_snd'">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_snd'">Prod.map_snd'</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Prod.snd</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Prod.snd</span></span></span></div></div></div></div><div class="decl" id="Prod.map_comp_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L49-L56">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_comp_map">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_comp_map">Prod.map_comp_map</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_6</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_5</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ζ : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">γ</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">ε</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">δ</span> → <span class="fn">ζ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">g</span> <span class="fn">g'</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">f'</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> (<span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>) (<span class="fn"><span class="fn">g'</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f'</span></span>)</span></span></div></div><p>Composing a <code>prod.map</code> with another <code>prod.map</code> is equal to
+a single <code>prod.map</code> of composed functions.</p></div></div><div class="decl" id="Prod.map_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L58-L64">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_map">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_map">Prod.map_map</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_5</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_6</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ζ : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">γ</span> → <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">ε</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">δ</span> → <span class="fn">ζ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">g</span> <span class="fn">g'</span> (<span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">f'</span> <span class="fn">x</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> (<span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>) (<span class="fn"><span class="fn">g'</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f'</span></span>) <span class="fn">x</span></span></span></div></div><p>Composing a <code>prod.map</code> with another <code>prod.map</code> is equal to
+a single <code>prod.map</code> of composed functions, fully applied.</p></div></div><div class="decl" id="Prod.mk.inj_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L66-L68">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.mk.inj_iff">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.mk.inj_iff">Prod.mk.inj_iff</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a₁ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a₂ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b₁ : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b₂ : <span class="fn">β</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">a₁</span>, <span class="fn">b₁</span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">a₂</span>, <span class="fn">b₂</span>)</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a₁</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a₂</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b₁</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b₂</span></span></span></span></div></div></div></div><div class="decl" id="Prod.mk.inj_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L70-L72">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.mk.inj_left">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.mk.inj_left">Prod.mk.inj_left</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> (<span class="fn"><a href="../.././Init/Prelude.html#Prod.mk">Prod.mk</a> <span class="fn">a</span></span>)</span></div></div></div></div><div class="decl" id="Prod.mk.inj_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L74-L76">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.mk.inj_right">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.mk.inj_right">Prod.mk.inj_right</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn">(<span class="fn">a</span>, <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="Prod.mk.eta"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L79-L80">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.mk.eta">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.mk.eta">Prod.mk.eta</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">p</span>.fst</span>, <span class="fn"><span class="fn">p</span>.snd</span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="Prod.ext_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L82-L83">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.ext_iff">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.ext_iff">Prod.ext_iff</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span>.fst</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">p</span>.snd</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span>.snd</span></span></span></span></div></div></div></div><div class="decl" id="Prod.ext'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L87-L89">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.ext'">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.ext'">Prod.ext'</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><span class="fn">p</span>.fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span>.fst</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">p</span>.snd</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span>.snd</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span></div></div></div></div><div class="decl" id="Prod.map_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L91-L92">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.map_def">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.map_def">Prod.map_def</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">p</span>.fst</span></span>, <span class="fn"><span class="fn">g</span> <span class="fn"><span class="fn">p</span>.snd</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Prod.id_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L94-L95">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.id_prod">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.id_prod">Prod.id_prod</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">(<span class="fn"><span class="fn">p</span>.fst</span>, <span class="fn"><span class="fn">p</span>.snd</span>)</span></span>) <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">id</span></span></div></div></div></div><div class="decl" id="Prod.fst_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L97-L98">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.fst_surjective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.fst_surjective">Prod.fst_surjective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">Prod.fst</span></span></div></div></div></div><div class="decl" id="Prod.snd_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L100-L101">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.snd_surjective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.snd_surjective">Prod.snd_surjective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">Prod.snd</span></span></div></div></div></div><div class="decl" id="Prod.fst_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L103-L104">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.fst_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.fst_injective">Prod.fst_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">Prod.fst</span></span></div></div></div></div><div class="decl" id="Prod.snd_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L106-L107">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.snd_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.snd_injective">Prod.snd_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">Prod.snd</span></span></div></div></div></div><div class="decl" id="Prod.swap"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L110-L110">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap">ink</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> → <span class="fn"><span class="fn">β</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">α</span></span></span></div></div><p>Swap the factors of a product. <code><a href="../.././Mathlib/Data/Prod.html#Prod.swap">swap</a> (a, b) = (b, a)</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">p</span>.snd</span>, <span class="fn"><span class="fn">p</span>.fst</span>)</span></span></li></ul></details></div></div><div class="decl" id="Prod.swap_swap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L112-L113">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_swap">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_swap">Prod.swap_swap</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> (<span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> <span class="fn">x</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="Prod.fst_swap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L115-L115">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.fst_swap">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.fst_swap">Prod.fst_swap</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> <span class="fn">p</span></span>).fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">p</span>.snd</span></span></div></div></div></div><div class="decl" id="Prod.snd_swap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L117-L117">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.snd_swap">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.snd_swap">Prod.snd_swap</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> <span class="fn">p</span></span>).snd</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">p</span>.fst</span></span></div></div></div></div><div class="decl" id="Prod.swap_prod_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L119-L119">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_prod_mk">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_prod_mk">Prod.swap_prod_mk</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">β</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> <span class="fn">(<span class="fn">a</span>, <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">b</span>, <span class="fn">a</span>)</span></span></div></div></div></div><div class="decl" id="Prod.swap_swap_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L121-L122">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_swap_eq">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_swap_eq">Prod.swap_swap_eq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Prod.swap</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Prod.swap</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">id</span></span></div></div></div></div><div class="decl" id="Prod.swap_LeftInverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L124-L125">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_LeftInverse">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_LeftInverse">Prod.swap_LeftInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">Prod.swap</span> <span class="fn">Prod.swap</span></span></div></div></div></div><div class="decl" id="Prod.swap_RightInverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L127-L128">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_RightInverse">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_RightInverse">Prod.swap_RightInverse</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">Prod.swap</span> <span class="fn">Prod.swap</span></span></div></div></div></div><div class="decl" id="Prod.swap_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L130-L131">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_injective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_injective">Prod.swap_injective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">Prod.swap</span></span></div></div></div></div><div class="decl" id="Prod.swap_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L133-L134">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_surjective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_surjective">Prod.swap_surjective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">Prod.swap</span></span></div></div></div></div><div class="decl" id="Prod.swap_bijective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L136-L137">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_bijective">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_bijective">Prod.swap_bijective</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.bijective">Function.bijective</a> <span class="fn">Prod.swap</span></span></div></div></div></div><div class="decl" id="Prod.swap_inj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L139-L140">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.swap_inj">ink</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.swap_inj">Prod.swap_inj</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.swap">Prod.swap</a> <span class="fn">q</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="Prod.eq_iff_fst_eq_snd_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L142-L143">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.eq_iff_fst_eq_snd_eq">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.eq_iff_fst_eq_snd_eq">Prod.eq_iff_fst_eq_snd_eq</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span>.fst</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">p</span>.snd</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span>.snd</span></span></span></span></div></div></div></div><div class="decl" id="Prod.fst_eq_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L145-L146">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.fst_eq_iff">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.fst_eq_iff">Prod.fst_eq_iff</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">x</span>, <span class="fn"><span class="fn">p</span>.snd</span>)</span></span></span></div></div></div></div><div class="decl" id="Prod.snd_eq_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L148-L149">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.snd_eq_iff">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.snd_eq_iff">Prod.snd_eq_iff</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">β</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.snd</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">p</span>.fst</span>, <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="Prod.lex_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L151-L159">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.lex_def">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.lex_def">Prod.lex_def</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><span class="fn">β</span> → <span class="fn">β</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/WF.html#Prod.Lex">Prod.Lex</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">p</span> <span class="fn">q</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn"><span class="fn">p</span>.fst</span> <span class="fn"><span class="fn">q</span>.fst</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span>.fst</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">s</span> <span class="fn"><span class="fn">p</span>.snd</span> <span class="fn"><span class="fn">q</span>.snd</span></span></span></span></span></div></div></div></div><div class="decl" id="Prod.Lex.decidable"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L161-L164">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Prod.Lex.decidable">ink</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Prod.Lex.decidable">Prod.Lex.decidable</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><span class="fn">β</span> → <span class="fn">β</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">r</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">s</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> (<span class="fn"><a href="../.././Init/WF.html#Prod.Lex">Prod.Lex</a> <span class="fn">r</span> <span class="fn">s</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Prod.html#Prod.Lex.decidable">Prod.Lex.decidable</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Init/Core.html#decidable_of_decidable_of_iff">decidable_of_decidable_of_iff</a> (_ : <span class="fn"><span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn"><span class="fn">x</span>.fst</span> <span class="fn"><span class="fn">x</span>.fst</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">x</span>.fst</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span>.fst</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">s</span> <span class="fn"><span class="fn">x</span>.snd</span> <span class="fn"><span class="fn">x</span>.snd</span></span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Init/WF.html#Prod.Lex">Prod.Lex</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">x</span></span></span>)</span></span></li></ul></details></div></div><div class="decl" id="Function.injective.prod_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L170-L177">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Function.injective.prod_map">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Function.injective.prod_map">Function.injective.prod_map</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.injective">Function.injective</a> (<span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></div></div></div></div><div class="decl" id="Function.surjective.prod_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/876d9cc42ccbfea023752e40e6edb7279d9c6b5a/Mathlib/Data/Prod.lean#L179-L183">source</a></div><div class="ink_link"><a href="../.././src/Mathlib/Data/Prod.html#Function.surjective.prod_map">ink</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Data/Prod.html#Function.surjective.prod_map">Function.surjective.prod_map</a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_3</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn">Type u_2</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <span class="fn">Type u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.surjective">Function.surjective</a> (<span class="fn"><a href="../.././Init/Core.html#Prod.map">Prod.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././/navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

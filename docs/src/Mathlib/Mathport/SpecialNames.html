@@ -1,0 +1,85 @@
+<html lang="en" class="alectryon-standalone"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././src/alectryon.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="stylesheet" href="../../.././src/docutils_basic.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><script defer="true" src="../../.././src/alectryon.js"></script></head><body><article class="alectryon-root alectryon-centered"><div class="alectryon-banner">Built with <a href="https://github.com/leanprover/doc-gen4">doc-gen4</a>, running Lean4.
+      Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents.
+      Use <kbd>Ctrl+↑</kbd><kbd>Ctrl+↓</kbd>to navigate, <kbd>Ctrl+🖱️</kbd>to focus.
+      On Mac, use <kbd>Cmd</kbd>instead of <kbd>Ctrl</kbd>.
+    </div><pre class="alectryon-io highlight"><span class="alectryon-wsp"><span class="alectryon-token">/-
+Copyright (c) 2021 Microsoft Corporation. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Daniel Selsam
+-/
+import Mathlib.Mathport.Rename
+
+</span><span class="alectryon-token"><span class="k">namespace</span></span><span class="alectryon-token"> Mathlib.Prelude
+
+-- Note: we do not currently auto-align constants.
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> quot Quot
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> quot.mk Quot.mk
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> quot.lift Quot.lift
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> quot.ind Quot.ind
+
+-- Otherwise would be`OutParam` and `OptParam`!
+-- Note: we want `auto_param` to *not* align.
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> out_param               outParam
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> opt_param               optParam
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> heq                     HEq
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> psigma                  PSigma
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> punit                   PUnit
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> pprod                   PProd
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> psum                    PSum
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> ulift                   ULift
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe Coe
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe.coe Coe.coe
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe_t CoeT
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe_t.coe CoeT.coe
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe_to_fun CoeFun
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe_to_fun.coe CoeFun.coe
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe_to_sort CoeSort
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_coe_to_sort.coe CoeSort.coe
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_le                  LE
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_le.le               LE.le
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_lt                  LT
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_lt.lt               LT.lt
+
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_beq                 BEq
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_sizeof              SizeOf
+
+-- This otherwise causes filenames to clash
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> category_theory.Kleisli CategoryTheory.KleisliCat
+
+-- TODO: backport?
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> int.neg_succ_of_nat     Int.negSucc
+
+-- Generic 'has'-stripping
+-- Note: we don't currently strip automatically for various reasons.
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_zero      Zero
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_one       One
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_inv       Inv
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_add       Add
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_sub       Sub
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_mul       Mul
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_div       Div
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_neg       Neg
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_mod       Mod
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_pow       Pow
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_append    Append
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_pure      Pure
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_bind      Bind
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_seq       Seq
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_seq_left  SeqLeft
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_seq_right SeqRight
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> has_dvd       Dvd
+
+-- Implementation detail
+</span><span class="alectryon-token"><span class="k">#align</span></span><span class="alectryon-token"> _sorry_placeholder_     _sorry_placeholder_
+
+
+
+</span><span class="alectryon-token"><span class="k">end</span></span><span class="alectryon-token"> Mathlib.Prelude
+</span></span></pre></article></body></html>

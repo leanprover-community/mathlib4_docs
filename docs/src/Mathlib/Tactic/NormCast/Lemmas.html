@@ -1,0 +1,77 @@
+<html lang="en" class="alectryon-standalone"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././src/alectryon.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="stylesheet" href="../../../.././src/docutils_basic.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><script defer="true" src="../../../.././src/alectryon.js"></script></head><body><article class="alectryon-root alectryon-centered"><div class="alectryon-banner">Built with <a href="https://github.com/leanprover/doc-gen4">doc-gen4</a>, running Lean4.
+      Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents.
+      Use <kbd>Ctrl+↑</kbd><kbd>Ctrl+↓</kbd>to navigate, <kbd>Ctrl+🖱️</kbd>to focus.
+      On Mac, use <kbd>Cmd</kbd>instead of <kbd>Ctrl</kbd>.
+    </div><pre class="alectryon-io highlight"><span class="alectryon-wsp"><span class="alectryon-token">/-
+Copyright (c) 2022 Gabriel Ebner. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Gabriel Ebner
+-/
+
+import Mathlib.Tactic.NormCast.CoeExt
+import Mathlib.Tactic.NormCast.Ext
+
+</span><span class="alectryon-token"><span class="k">/-- `addElim foo` registers `foo` as an elim-lemma in `norm_cast`. -/
+</span></span><span class="alectryon-token"><span class="k">local</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><span class="k">elab</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><span class="k">"addElim"</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>id</var><b>: </b><span>Lean.TSyntax `ident</span></span></div></blockquote></div></small></div><span class="nv">id</span></span><span class="alectryon-token"><span class="k">:ident : command =>
+  </span></span><span class="alectryon-token"><span class="k">open</span></span><span class="alectryon-token"><span class="k"> Tactic.NormCast Lean Meta </span></span><span class="alectryon-token"><span class="k">in</span></span><span class="alectryon-token"><span class="k">
+  </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>Elab.Command.liftCoreM</var><b>: </b><span>{α : Type} → Lean.CoreM α → Lean.Elab.Command.CommandElabM α</span></span></div></blockquote></div></small></div><span class="k">Elab.Command.liftCoreM</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><span class="k">do</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>MetaM.run'</var><b>: </b><span>{α : Type} →
+  Lean.MetaM α →
+    optParam Lean.Meta.Context
+        { config :=
+            { foApprox := false, ctxApprox := false, quasiPatternApprox := false, constApprox := false,
+              isDefEqStuckEx := false, transparency := Lean.Meta.TransparencyMode.default, zetaNonDep := true,
+              trackZeta := false, unificationHints := true, proofIrrelevance := true, assignSyntheticOpaque := false,
+              ignoreLevelMVarDepth := true, offsetCnstrs := true, etaStruct := Lean.Meta.EtaStructMode.all },
+          lctx :=
+            { fvarIdToDecl :=
+                { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+              decls :=
+                { root := Std.PersistentArrayNode.node (Array.mkEmpty (USize.toNat Std.PersistentArray.branching)),
+                  tail := Array.mkEmpty (USize.toNat Std.PersistentArray.branching), size := 0,
+                  shift := Std.PersistentArray.initShift, tailOff := 0 } },
+          localInstances := #[], defEqCtx? := none, synthPendingDepth := 0, canUnfold? := none } →
+      optParam Lean.Meta.State
+          { mctx :=
+              { depth := 0, mvarCounter := 0,
+                lDepth :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                decls :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                userNames :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                lAssignment :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                eAssignment :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                dAssignment :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                usedAssignment := false },
+            cache :=
+              { inferType :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                funInfo :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                synthInstance :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                whnfDefault :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                whnfAll :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                defEqDefault :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 },
+                defEqAll :=
+                  { root := Std.PersistentHashMap.Node.entries Std.PersistentHashMap.mkEmptyEntriesArray, size := 0 } },
+            zetaFVarIds := ∅,
+            postponed :=
+              { root := Std.PersistentArrayNode.node (Array.mkEmpty (USize.toNat Std.PersistentArray.branching)),
+                tail := Array.mkEmpty (USize.toNat Std.PersistentArray.branching), size := 0,
+                shift := Std.PersistentArray.initShift, tailOff := 0 } } →
+        Lean.CoreM α</span></span></div></blockquote></div></small></div><span class="k">MetaM.run'</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><span class="k">do</span></span><span class="alectryon-token"><span class="k">
+    </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>addElim</var><b>: </b><span>Lean.Name → optParam Lean.AttributeKind Lean.AttributeKind.global → optParam Nat 1000 → Lean.MetaM Unit</span></span></div></blockquote></div></small></div><span class="k">addElim</span></span><span class="alectryon-token"><span class="k"> </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>(← resolveGlobalConstNoOverload id)</var><b>: </b><span>Lean.Name</span></span></div></blockquote></div></small></div><span class="nv">(← </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>resolveGlobalConstNoOverload</var><b>: </b><span>{m : Type → Type} →
+  [inst : Monad m] →
+    [inst : Lean.MonadResolveName m] → [inst : Lean.MonadEnv m] → [inst : Lean.MonadError m] → Lean.Syntax → m Lean.Name</span></span></div></blockquote></div></small></div><span class="nv">resolveGlobalConstNoOverload</span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>(← resolveGlobalConstNoOverload id)</var><b>: </b><span>Lean.Name</span></span></div></blockquote></div></small></div><span class="nv"> </span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>id</var><b>: </b><span>Lean.TSyntax `ident</span></span></div></blockquote></div></small></div><span class="nv">id</span></span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>(← resolveGlobalConstNoOverload id)</var><b>: </b><span>Lean.Name</span></span></div></blockquote></div></small></div><span class="nv">)</span></span><span class="alectryon-token">
+
+</span><span class="alectryon-token"><span class="k">addElim</span></span><span class="alectryon-token"> ne_eq
+
+</span><span class="alectryon-token"><span class="k">attribute</span></span><span class="alectryon-token"> [</span><span class="alectryon-token"><span class="k">coe</span></span><span class="alectryon-token">] </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>Fin.val</var><b>: </b><span>{n : Nat} → Fin n → Nat</span></span></div></blockquote></div></small></div>Fin.val</span><span class="alectryon-token"> </span><span class="alectryon-token"><div class="alectryon-type-info-wrapper"><small class="alectryon-type-info"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span class="hyp-type"><var>Array.ofSubarray</var><b>: </b><span>{α : Type u} → Subarray α → Array α</span></span></div></blockquote></div></small></div>Array.ofSubarray</span><span class="alectryon-token">
+</span></span></pre></article></body></html>
