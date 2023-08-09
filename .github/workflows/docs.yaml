@@ -35,7 +35,7 @@ jobs:
         working-directory: mathlib4
         run: env LEAN_ABORT_ON_PANIC=1 lake build
 
-      - name: generate and deploy docs
+      - name: create dummy docs project
         run: |
           # Workaround for the lake issue
           elan default leanprover/lean4:nightly
@@ -54,9 +54,14 @@ jobs:
           cp -r ../mathlib4/lake-packages/* lake-packages/
           lake update
 
+      - name: generate docs
+        working-directory: workaround
+        run: |
           lake build Std:docs Qq:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
 
-          cp ../mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} build/doc
+      - name: copy extra files
+        run: |
+          cp mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} workaround/build/doc
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
