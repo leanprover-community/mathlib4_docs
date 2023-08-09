@@ -52,7 +52,7 @@ jobs:
           mkdir lake-packages
           cp -r ../mathlib4/lake-packages/* lake-packages/
           lake update
-          lake build doc-gen
+          lake build doc-gen4
 
       - name: generate docs
         working-directory: workaround
