@@ -11,10 +11,8 @@ jobs:
     steps:
       - name: clean up
         run: |
-          rm -rf mathlib4
           rm -rf $HOME/.elan
           rm -rf $HOME/.cache/mathlib
-          rm -rf $HOME/.ssh
 
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -60,14 +58,11 @@ jobs:
 
           cp ../mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} build/doc
 
-      - name: debug
-        run: |
-          tree workaround/build/doc
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: 'workaround/build/doc'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
@@ -75,6 +70,5 @@ jobs:
       - name: clean up
         if: always()
         run: |
-          rm -rf ../mathlib4
           rm -rf $HOME/.elan
           rm -rf $HOME/.cache/mathlib
