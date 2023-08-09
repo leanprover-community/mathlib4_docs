@@ -1,0 +1,80 @@
+name: build and deploy mathlib4 docs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */8 * * *' # every 8 hours
+jobs:
+  build:
+    name: build and deploy mathlib4 docs
+    runs-on: doc-gen
+    steps:
+      - name: clean up
+        run: |
+          rm -rf mathlib4
+          rm -rf $HOME/.elan
+          rm -rf $HOME/.cache/mathlib
+          rm -rf $HOME/.ssh
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: leanprover-community/mathlib4
+          path: mathlib4
+
+      - name: install elan
+        run: |
+          set -o pipefail
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain none -y
+          ~/.elan/bin/lean --version
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: get cache
+        working-directory: mathlib4
+        run: lake exe cache get
+
+      - name: build mathlib
+        working-directory: mathlib4
+        run: env LEAN_ABORT_ON_PANIC=1 lake build
+
+      - name: generate and deploy docs
+        run: |
+          # Workaround for the lake issue
+          elan default leanprover/lean4:nightly
+          lake new workaround
+          cd workaround
+          cp -f ../mathlib4/lean-toolchain .
+          echo 'require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "main"' >> lakefile.lean
+          echo 'require «mathlib» from ".." / "mathlib4"' >> lakefile.lean
+
+          # doc-gen4 expects to work on github repos with at least one commit
+          git add .
+          git commit -m "workaround"
+          git remote add origin "https://github.com/leanprover/workaround"
+
+          mkdir lake-packages
+          cp -r ../mathlib4/lake-packages/* lake-packages/
+          lake update
+
+          lake build Std:docs Qq:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
+
+          cp ../mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} build/doc
+
+      - name: debug
+        run: |
+          tree workaround/build/doc
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'workaround/build/doc'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+
+      - name: clean up
+        if: always()
+        run: |
+          rm -rf ../mathlib4
+          rm -rf $HOME/.elan
+          rm -rf $HOME/.cache/mathlib
