@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: clean up
         run: |
+          rm -rf mathlib4
+          rm -rf workaround
           rm -rf $HOME/.elan
           rm -rf $HOME/.cache/mathlib
 
@@ -76,5 +78,7 @@ jobs:
       - name: clean up
         if: always()
         run: |
+          rm -rf mathlib4
+          rm -rf workaround
           rm -rf $HOME/.elan
           rm -rf $HOME/.cache/mathlib
