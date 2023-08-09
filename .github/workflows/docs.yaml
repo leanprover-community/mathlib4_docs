@@ -24,7 +24,6 @@ jobs:
         run: |
           set -o pipefail
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain none -y
-          ~/.elan/bin/lean --version
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
       - name: get cache
@@ -53,6 +52,7 @@ jobs:
           mkdir lake-packages
           cp -r ../mathlib4/lake-packages/* lake-packages/
           lake update
+          lake build doc-gen
 
       - name: generate docs
         working-directory: workaround
