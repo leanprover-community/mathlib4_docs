@@ -4,6 +4,13 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 */8 * * *' # every 8 hours
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     name: build and deploy mathlib4 docs
@@ -54,6 +61,10 @@ jobs:
           mkdir lake-packages
           cp -r ../mathlib4/lake-packages/* lake-packages/
           lake update
+
+      - name: build doc-gen4
+        working-directory: workaround
+        run: |
           lake build doc-gen4
 
       - name: generate docs
