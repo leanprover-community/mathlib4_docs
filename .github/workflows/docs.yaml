@@ -58,8 +58,8 @@ jobs:
           git commit -m "workaround"
           git remote add origin "https://github.com/leanprover/workaround"
 
-          mkdir lake-packages
-          cp -r ../mathlib4/lake-packages/* lake-packages/
+          mkdir -p .lake/packages
+          cp -r ../mathlib4/.lake/packages/* .lake/packages
           lake update
 
       - name: build doc-gen4
@@ -74,12 +74,12 @@ jobs:
 
       - name: copy extra files
         run: |
-          cp mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} workaround/build/doc
+          cp mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} workaround/.lake/build/doc
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'workaround/build/doc'
+          path: 'workaround/.lake/build/doc'
 
       - name: Deploy to GitHub Pages
         id: deployment
