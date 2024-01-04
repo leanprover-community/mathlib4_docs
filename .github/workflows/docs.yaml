@@ -54,6 +54,8 @@ jobs:
           echo 'require «mathlib» from ".." / "mathlib4"' >> lakefile.lean
 
           # doc-gen4 expects to work on github repos with at least one commit
+          git config user.email "mathlib4_docs@leanprover-community.github.io"
+          git config user.name "mathlib4_docs CI"
           git add .
           git commit -m "workaround"
           git remote add origin "https://github.com/leanprover/workaround"
