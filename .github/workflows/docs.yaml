@@ -72,7 +72,7 @@ jobs:
       - name: generate docs
         working-directory: workaround
         run: |
-          lake build Std:docs Qq:docs Aesop:docs ProofWidgets:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
+          lake build Batteries:docs Qq:docs Aesop:docs ProofWidgets:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
 
       - name: copy extra files
         run: |
