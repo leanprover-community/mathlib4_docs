@@ -62,11 +62,15 @@ jobs:
           git config user.name "mathlib4_docs CI"
           git add .
           git commit -m "workaround"
-          git remote add origin "https://github.com/leanprover/workaround"
+          git remote add origin "https://github.com/leanprover-community/workaround"
 
           mkdir -p .lake/packages
           cp -r ../mathlib4/.lake/packages/* .lake/packages
           lake update
+
+          # Copy references.bib over while doc-gen lacks support for subproject references.bib
+          mkdir docs/
+          cp ../mathlib4/docs/references.bib docs/references.bib
 
       - name: build doc-gen4
         working-directory: workaround
