@@ -83,9 +83,20 @@ jobs:
           lake build Batteries:docs Qq:docs Aesop:docs ProofWidgets:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
           lake build Mathlib:docsHeader
 
+      - name: build import graph
+        working-directory: mathlib4
+        run: |
+          lake exe graph mathlib.html
+        continue-on-error: true
+
       - name: copy extra files
         run: |
           cp mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} workaround/.lake/build/doc
+
+      - name: copy graph
+        run: |
+          cp mathlib4/mathlib.html workaround/.lake/build/doc
+        continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
