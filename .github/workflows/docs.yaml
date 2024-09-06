@@ -77,6 +77,11 @@ jobs:
         run: |
           lake build doc-gen4
 
+      - name: build import graph
+        working-directory: mathlib4
+        run: |
+          lake exe graph mathlib.html
+
       - name: generate docs
         working-directory: workaround
         run: |
@@ -86,6 +91,10 @@ jobs:
       - name: copy extra files
         run: |
           cp mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} workaround/.lake/build/doc
+
+      - name: copy import graph
+        run: |
+          cp mathlib4/mathlib.html workaround/.lake/build/doc
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
