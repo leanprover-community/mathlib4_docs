@@ -1,0 +1,15 @@
+name = "workaround"
+version = "0.1.0"
+defaultTargets = ["workaround"]
+
+[[lean_lib]]
+name = "Workaround"
+
+[[require]]
+scope = "leanprover"
+name = "doc-gen4"
+rev = "master"
+
+[[require]]
+name = "mathlib"
+path = "../mathlib4"

@@ -18,12 +18,20 @@ jobs:
     steps:
       - name: clean up
         run: |
+          rm -rf mathlib4_docs
           rm -rf mathlib4
           rm -rf workaround
           rm -rf $HOME/.elan
           rm -rf $HOME/.cache/mathlib
 
       - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: leanprover-community/mathlib4_docs
+          path: mathlib4_docs
+
+
+      - name: Checkout mathlib
         uses: actions/checkout@v3
         with:
           repository: leanprover-community/mathlib4
@@ -50,12 +58,10 @@ jobs:
 
       - name: create dummy docs project
         run: |
-          # Workaround for the lake issue
-          lake new workaround
+          lake new workaround lib
           cd workaround
           cp -f ../mathlib4/lean-toolchain .
-          echo 'require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "main"' >> lakefile.lean
-          echo 'require «mathlib» from ".." / "mathlib4"' >> lakefile.lean
+          cp -f ../mathlib4_docs/lakefile.toml .
 
           # doc-gen4 expects to work on github repos with at least one commit
           git config user.email "mathlib4_docs@leanprover-community.github.io"
@@ -108,6 +114,7 @@ jobs:
       - name: clean up
         if: always()
         run: |
+          rm -rf mathlib4_docs
           rm -rf mathlib4
           rm -rf workaround
           rm -rf $HOME/.elan
