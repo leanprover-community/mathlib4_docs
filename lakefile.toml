@@ -8,7 +8,7 @@ name = "Workaround"
 [[require]]
 scope = "leanprover"
 name = "doc-gen4"
-rev = "master"
+rev = "main"
 
 [[require]]
 name = "mathlib"
