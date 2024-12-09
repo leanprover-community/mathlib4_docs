@@ -25,14 +25,14 @@ jobs:
           rm -rf $HOME/.cache/mathlib
 
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: leanprover-community/mathlib4_docs
           path: mathlib4_docs
 
 
       - name: Checkout mathlib
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: leanprover-community/mathlib4
           path: mathlib4
@@ -103,13 +103,13 @@ jobs:
           cp mathlib4/mathlib.html workaround/.lake/build/doc
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'workaround/.lake/build/doc'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
 
       - name: clean up
         if: always()
