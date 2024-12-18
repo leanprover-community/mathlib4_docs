@@ -96,7 +96,7 @@ jobs:
 
       - name: copy extra files
         run: |
-          cp mathlib4/docs/{100.yaml,overview.yaml,undergrad.yaml} workaround/.lake/build/doc
+          cp mathlib4/docs/{100.yaml,1000.yaml,overview.yaml,undergrad.yaml} workaround/.lake/build/doc
 
       - name: copy import graph
         run: |
