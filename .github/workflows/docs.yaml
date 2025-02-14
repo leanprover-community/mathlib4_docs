@@ -91,7 +91,7 @@ jobs:
       - name: generate docs
         working-directory: workaround
         run: |
-          lake build Batteries:docs Qq:docs Aesop:docs ProofWidgets:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
+          lake build Batteries:docs Qq:docs Aesop:docs Cache:docs Cli:docs ImportGraph:docs Plausible:docs ProofWidgets:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
           lake build Mathlib:docsHeader
 
       - name: copy extra files
