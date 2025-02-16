@@ -1,6 +1,10 @@
 name: build and deploy mathlib4 docs
 
 on:
+  push:
+    branches:
+      - main
+  pull_request:
   workflow_dispatch:
   schedule:
     - cron: '0 */8 * * *' # every 8 hours
@@ -108,6 +112,7 @@ jobs:
           path: 'workaround/.lake/build/doc'
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
         id: deployment
         uses: actions/deploy-pages@v4
 
