@@ -1,6 +1,9 @@
 name: build and deploy mathlib4 docs
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
   schedule:
