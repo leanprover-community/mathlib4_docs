@@ -85,7 +85,7 @@ jobs:
       - name: build doc-gen4
         working-directory: workaround
         run: |
-          lake build doc-gen4
+          env DISABLE_EQUATIONS=1 lake build doc-gen4
 
       - name: build import graph
         working-directory: mathlib4
