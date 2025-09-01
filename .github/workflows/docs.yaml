@@ -85,7 +85,7 @@ jobs:
       - name: build doc-gen4
         working-directory: workaround
         run: |
-          env DISABLE_EQUATIONS=1 lake build doc-gen4
+          lake build doc-gen4
 
       - name: build import graph
         working-directory: mathlib4
@@ -95,6 +95,7 @@ jobs:
       - name: generate docs
         working-directory: workaround
         run: |
+          export DISABLE_EQUATIONS=1
           lake build Batteries:docs Qq:docs Aesop:docs ProofWidgets:docs Mathlib:docs Archive:docs Counterexamples:docs docs:docs
           lake build Mathlib:docsHeader
 
