@@ -6,9 +6,9 @@ defaultTargets = ["workaround"]
 name = "Workaround"
 
 [[require]]
-scope = "leanprover"
 name = "doc-gen4"
-rev = "main"
+git = "https://github.com/Vierkantor/doc-gen4"
+rev = "importAll"
 
 [[require]]
 name = "mathlib"
