@@ -29,14 +29,14 @@ jobs:
           rm -rf $HOME/.cache/mathlib
 
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: leanprover-community/mathlib4_docs
           path: mathlib4_docs
 
 
       - name: Checkout mathlib
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: leanprover-community/mathlib4
           path: mathlib4
@@ -107,14 +107,14 @@ jobs:
           cp mathlib4/mathlib.html workaround/.lake/build/doc
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: 'workaround/.lake/build/doc'
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
 
       - name: clean up
         if: always()
@@ -124,3 +124,11 @@ jobs:
           rm -rf workaround
           rm -rf $HOME/.elan
           rm -rf $HOME/.cache/mathlib
+
+  workflow-keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: liskin/gh-workflow-keepalive@f72ff1a1336129f29bf0166c0fd0ca6cf1bcb38c # v1.2.1
