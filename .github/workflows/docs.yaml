@@ -138,7 +138,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          JOB_NAME="build"
+          JOB_NAME="build and deploy mathlib4 docs"
 
           # Get URL and conclusion for the specific job
           JOB_DATA=$(gh run view ${{ github.run_id }} --json jobs --jq \
