@@ -125,6 +125,45 @@ jobs:
           rm -rf $HOME/.elan
           rm -rf $HOME/.cache/mathlib
 
+  notify_if_failed:
+    runs-on: ubuntu-latest
+    needs: build
+    if: always()
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Get job status and URLs
+        id: get-status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          JOB_NAME="build and deploy mathlib4 docs"
+
+          # Get URL and conclusion for the specific job
+          JOB_DATA=$(gh run view ${{ github.run_id }} --json jobs --jq \
+            ".jobs[] | select(.name == \"$JOB_NAME\")")
+
+          JOB_URL=$(echo "$JOB_DATA" | jq -r '.url')
+
+          JOB_CONCLUSION=$(echo "$JOB_DATA" | jq -r '.conclusion')
+
+          echo "job_url=${JOB_URL}" | tee -a "$GITHUB_OUTPUT"
+          echo "job_conclusion=${JOB_CONCLUSION}" | tee -a "$GITHUB_OUTPUT"
+
+      - name: Post failure / cancelled message for mathlib_test_executable on Zulip
+        if: steps.get-status.outputs.job_conclusion != 'success'
+        uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+        with:
+          api-key: ${{ secrets.ZULIP_API_KEY }}
+          email: 'leanprover-community-monitor-runners-bot@leanprover.zulipchat.com'
+          organization-url: 'https://leanprover.zulipchat.com'
+          to: 'nightly-testing'
+          type: 'stream'
+          topic: 'mathlib4_docs failure'
+          content: |
+            ❌ mathlib4_docs [${{ steps.get-status.outputs.job_conclusion }}](${{ steps.get-status.outputs.job_url }}) on ${{ github.sha }}
+
   workflow-keepalive:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
