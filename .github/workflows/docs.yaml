@@ -158,7 +158,7 @@ jobs:
           api-key: ${{ secrets.ZULIP_API_KEY }}
           email: 'leanprover-community-monitor-runners-bot@leanprover.zulipchat.com'
           organization-url: 'https://leanprover.zulipchat.com'
-          to: 'nightly-testing'
+          to: 'nightly-testing-mathlib'
           type: 'stream'
           topic: 'mathlib4_docs failure'
           content: |
