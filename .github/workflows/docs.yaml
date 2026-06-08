@@ -29,14 +29,14 @@ jobs:
           rm -rf $HOME/.cache/mathlib
 
       - name: Checkout repo
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           repository: leanprover-community/mathlib4_docs
           path: mathlib4_docs
 
 
       - name: Checkout mathlib
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           repository: leanprover-community/mathlib4
           path: mathlib4
@@ -107,14 +107,14 @@ jobs:
           cp mathlib4/mathlib.html workaround/.lake/build/doc
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: 'workaround/.lake/build/doc'
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
 
       - name: clean up
         if: always()
@@ -128,10 +128,10 @@ jobs:
   notify_if_failed:
     runs-on: ubuntu-latest
     needs: build
-    if: always()
+    if: always() && github.event_name != 'pull_request'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Get job status and URLs
         id: get-status
@@ -153,12 +153,12 @@ jobs:
 
       - name: Post failure / cancelled message for mathlib_test_executable on Zulip
         if: steps.get-status.outputs.job_conclusion != 'success'
-        uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+        uses: zulip/github-actions-zulip/send-message@bd8ec52de371d139ae8313661b7d8318c19266aa # v2.0.1
         with:
           api-key: ${{ secrets.ZULIP_API_KEY }}
           email: 'leanprover-community-monitor-runners-bot@leanprover.zulipchat.com'
           organization-url: 'https://leanprover.zulipchat.com'
-          to: 'nightly-testing'
+          to: 'nightly-testing-mathlib'
           type: 'stream'
           topic: 'mathlib4_docs failure'
           content: |
