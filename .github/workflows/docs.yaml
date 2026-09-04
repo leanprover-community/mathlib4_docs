@@ -20,14 +20,6 @@ jobs:
     name: build and deploy mathlib4 docs
     runs-on: doc-gen
     steps:
-      - name: clean up
-        run: |
-          rm -rf mathlib4_docs
-          rm -rf mathlib4
-          rm -rf workaround
-          rm -rf $HOME/.elan
-          rm -rf $HOME/.cache/mathlib
-
       - name: Checkout repo
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
@@ -115,15 +107,6 @@ jobs:
         if: github.ref == 'refs/heads/main'
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
-
-      - name: clean up
-        if: always()
-        run: |
-          rm -rf mathlib4_docs
-          rm -rf mathlib4
-          rm -rf workaround
-          rm -rf $HOME/.elan
-          rm -rf $HOME/.cache/mathlib
 
   notify_if_failed:
     runs-on: ubuntu-latest
